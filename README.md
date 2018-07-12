@@ -2,18 +2,18 @@
 
 __\*Note:__ _This software is an __alpha__ version, don't make any changes if you don't understand what are you doing._
 
-__\*\*Note:__ _If you find __bug__ or you have good idea use the specific page [here](https://github.com/aleTerzi/magazzino/issues)._
+__\*\*Note:__ _If you find __bug__ or you have good idea use the specific page <a href="https://github.com/aleTerzi/magazzino/issues" target="_blank">here</a>._
 
 ## Configuration for a good installation:
 1. Wath you need:
     - An Anet board V.1 or V.1.5
     - A power supply for the alimentation of your motherboard.
     - A usb cable with one end of type __USB B.__
-    - The Arduino IDE, can you find it [here](https://www.arduino.cc/en/Main/Software?).
+    - The Arduino IDE, can you find it <a href="https://www.arduino.cc/en/Main/Software?" target="_blank">here</a>.
     _**Note:** use the offline version._
     
 2. Before proceed we need to add a custom configuration, of the board, on the Arduino IDE:
-    - Download the configuration [here](https://github.com/SkyNet3D/anet-board).
+    - Download the configuration <a href="https://github.com/SkyNet3D/anet-board" target="_blank">here</a>.
     - Unzip the file.
     - Find the directory "anet" in "anet-board-master/hardware", copy or cut the directory.
     - Now, go in your Arduino folder and in the subfolder named hardware, paste here the folder you had previously copied.
