@@ -1,9 +1,9 @@
-
+/*
 void setup(){}
 void loop() {}
-/*
+*/
 #include <LiquidCrystal.h>
-LiquidCrystal Display20x4(34, 35, 11, 12, 19, 20);
+LiquidCrystal Display20x4(28, 29, 10, 11, 16, 17);
 void setup() {
   // put your setup code here, to run once:
   Display20x4.begin(20, 4);
@@ -21,4 +21,4 @@ void loop() {
   Display20x4.print("Powered by ABOS o.s.");
   delay(500);
 }
-*/
+
