@@ -1,24 +1,34 @@
 /* UN GIRO DEL MOTORE SONO: 3200 step */
 /* Microsecondo 1 --> 0,001 Millisecondo */
+/* Pin Anet: https://github.com/MarlinFirmware/Marlin/blob/1.1.x/Marlin/pins_ANET_10.h */
 
-const int stepPin = 15;
-const int dirPin = 21;
-const int enable = 14;
+struct engine{
+  int stepPin;
+  int dirPin;
+  int enable;
+};
+
+const engine Xmotor{15, 21, 14};
+const engine Ymotor{22, 23, Xmotor.enable};
 int passi;
 
 void setup() {
-  pinMode(stepPin, OUTPUT);
-  pinMode(dirPin, OUTPUT);
-  pinMode(enable, OUTPUT);
+  pinMode(15, OUTPUT);
+  pinMode(21, OUTPUT);
+  pinMode(14, OUTPUT);
+  pinMode(22, OUTPUT);
+  pinMode(23, OUTPUT);
   Serial.begin(115200);
   Serial.println("\n<Arduino is ready>\n");
 }
 
 void loop() {
-  digitalWrite(enable, HIGH);
+  digitalWrite(Xmotor.enable, HIGH);
   passi = numeroStep();
   Serial.println(passi);
-  moveEngine();
+  moveEngine(Xmotor);
+  passi *= -1;
+  moveEngine(Ymotor);
 }
 
 int numeroStep() {
@@ -44,18 +54,18 @@ int numeroStep() {
   return 0;
 }
 
-void moveEngine() {
+void moveEngine(engine MoveThis) {
   if (passi >= 0) {
-    digitalWrite(dirPin, LOW);
+    digitalWrite(MoveThis.dirPin, LOW);
   } else {
-    digitalWrite(dirPin, HIGH);
+    digitalWrite(MoveThis.dirPin, HIGH);
     passi = passi * -1;
   }
-  digitalWrite(enable, LOW);
+  digitalWrite(MoveThis.enable, LOW);
   for (int x = 0; x < passi; x++) {
-    digitalWrite(stepPin, HIGH);
+    digitalWrite(MoveThis.stepPin, HIGH);
     delayMicroseconds(300);
-    digitalWrite(stepPin, LOW);
+    digitalWrite(MoveThis.stepPin, LOW);
     delayMicroseconds(300);
   }
 }
