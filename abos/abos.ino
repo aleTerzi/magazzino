@@ -2,7 +2,7 @@
 /* Microsecondo 1 --> 0,001 Millisecondo */
 /* Pin Anet: https://github.com/MarlinFirmware/Marlin/blob/1.1.x/Marlin/pins_ANET_10.h */
 
-struct engine{
+struct engine {
   int stepPin;
   int dirPin;
   int enable;
@@ -10,6 +10,7 @@ struct engine{
 
 const engine Xmotor{15, 21, 14};
 const engine Ymotor{22, 23, Xmotor.enable};
+const engine Zmotor{3, 2, 26};
 int passi;
 
 void setup() {
@@ -18,6 +19,9 @@ void setup() {
   pinMode(14, OUTPUT);
   pinMode(22, OUTPUT);
   pinMode(23, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(2, OUTPUT);
+  pinMode(26, OUTPUT);
   Serial.begin(115200);
   Serial.println("\n<Arduino is ready>\n");
 }
@@ -26,8 +30,9 @@ void loop() {
   digitalWrite(Xmotor.enable, HIGH);
   passi = numeroStep();
   Serial.println(passi);
+  moveEngine(Zmotor);
   moveEngine(Xmotor);
-  passi *= -1;
+  //passi *= -1;
   moveEngine(Ymotor);
 }
 
@@ -68,6 +73,7 @@ void moveEngine(engine MoveThis) {
     digitalWrite(MoveThis.stepPin, LOW);
     delayMicroseconds(300);
   }
+  digitalWrite(MoveThis.enable, HIGH);
 }
 
 
