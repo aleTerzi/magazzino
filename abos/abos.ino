@@ -44,7 +44,7 @@ void loop() {
   goHome(Xmotor);
   //goHome(Ymotor);
   goHome(Zmotor);
-  delay(10000);
+  while (readEndStop(Ymotor)) {}
 }
 
 int numeroStep() {
