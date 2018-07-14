@@ -77,7 +77,7 @@ void moveEngine(engine MoveThis, int moveStep) {
     digitalWrite(MoveThis.dirPin, HIGH);
     moveStep = moveStep * -1;
   }
-  //digitalWrite(MoveThis.enable, LOW);
+  //digitalWrite(MoveThis.enable, LOW); //Freno Motore <---
   for (int x = 0; x < moveStep; x++) {
     digitalWrite(MoveThis.stepPin, HIGH);
     delayMicroseconds(500);
