@@ -6,11 +6,12 @@ struct engine {
   int stepPin;
   int dirPin;
   int enable;
+  int endStop;
 };
 
-const engine Xmotor{15, 21, 14};
-const engine Ymotor{22, 23, Xmotor.enable};
-const engine Zmotor{3, 2, 26};
+const engine Xmotor{15, 21, 14, 18};
+const engine Ymotor{22, 23, Xmotor.enable, 19};
+const engine Zmotor{3, 2, 26, 20};
 int passi;
 
 void setup() {
@@ -22,18 +23,28 @@ void setup() {
   pinMode(3, OUTPUT);
   pinMode(2, OUTPUT);
   pinMode(26, OUTPUT);
+  pinMode(18, INPUT);
+  pinMode(19, INPUT);
+  pinMode(20, INPUT);
   Serial.begin(115200);
   Serial.println("\n<Arduino is ready>\n");
 }
 
 void loop() {
-  digitalWrite(Xmotor.enable, HIGH);
-  passi = numeroStep();
-  Serial.println(passi);
-  moveEngine(Zmotor);
-  moveEngine(Xmotor);
-  //passi *= -1;
-  moveEngine(Ymotor);
+  /* MANUAL CONTROL
+    passi = numeroStep();
+    Serial.println(passi);
+    moveEngine(Zmotor);
+    moveEngine(Xmotor);
+    //passi *= -1;
+    moveEngine(Ymotor);
+  */
+  /* GO HOME */
+  //Serial.print("entrato ");
+  goHome(Xmotor);
+  //goHome(Ymotor);
+  goHome(Zmotor);
+  delay(10000);
 }
 
 int numeroStep() {
@@ -59,21 +70,35 @@ int numeroStep() {
   return 0;
 }
 
-void moveEngine(engine MoveThis) {
-  if (passi >= 0) {
+void moveEngine(engine MoveThis, int moveStep) {
+  if (moveStep >= 0) {
     digitalWrite(MoveThis.dirPin, LOW);
   } else {
     digitalWrite(MoveThis.dirPin, HIGH);
-    passi = passi * -1;
+    moveStep = moveStep * -1;
   }
-  digitalWrite(MoveThis.enable, LOW);
-  for (int x = 0; x < passi; x++) {
+  //digitalWrite(MoveThis.enable, LOW);
+  for (int x = 0; x < moveStep; x++) {
     digitalWrite(MoveThis.stepPin, HIGH);
-    delayMicroseconds(300);
+    delayMicroseconds(500);
     digitalWrite(MoveThis.stepPin, LOW);
-    delayMicroseconds(300);
+    delayMicroseconds(500);
   }
-  digitalWrite(MoveThis.enable, HIGH);
+  //digitalWrite(MoveThis.enable, HIGH);
+}
+
+bool readEndStop(engine MoveThis) {
+  //Serial.print(digitalRead(MoveThis.endStop));
+  return digitalRead(MoveThis.endStop);
+}
+
+void goHome(engine MoveThis) {
+  moveEngine(MoveThis, -1600);
+  delay(300);
+  while (readEndStop(MoveThis)) {
+    //Serial.println("qui");
+    moveEngine(MoveThis, 1);
+  }
 }
 
 
