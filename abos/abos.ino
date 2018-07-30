@@ -31,20 +31,19 @@ void setup() {
 }
 
 void loop() {
-  /* MANUAL CONTROL
+  /* MANUAL CONTROL */
     passi = numeroStep();
     Serial.println(passi);
-    moveEngine(Zmotor);
-    moveEngine(Xmotor);
+    moveEngine(Zmotor, passi);
+    //moveEngine(Xmotor);
     //passi *= -1;
-    moveEngine(Ymotor);
-  */
+    //moveEngine(Ymotor);
   /* GO HOME */
   //Serial.print("entrato ");
-  goHome(Xmotor);
+  //goHome(Xmotor);
   //goHome(Ymotor);
-  goHome(Zmotor);
-  while (readEndStop(Ymotor)) {}
+  //goHome(Zmotor);
+  //while (readEndStop(Ymotor)) {}
 }
 
 int numeroStep() {
