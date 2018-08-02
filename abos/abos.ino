@@ -9,6 +9,7 @@
 /* SETUP */
 void setup()
 {
+	Pins.init();
 	LCD.init();
 	LCD.bootScreen();
 	Stepper.init();

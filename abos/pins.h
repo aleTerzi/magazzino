@@ -63,11 +63,17 @@ class PinsClass
 	//Declaration pin output:
 	 void pinOutput();
 
-	////Declaration pin input:
+	/*
+	 * //L.C.D. buttons:
+	 * read value: 17
+	 */
+	 const unsigned short int pin_in[1] = { 17 };
+
+	//Declaration pin input:
 	 void pinInput();
 
  public:
-	 void statementPins();
+	 void init();
 };
 
 extern PinsClass Pins;

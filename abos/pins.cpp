@@ -6,7 +6,7 @@
 
 
 /* PUBLIC */
-void PinsClass::statementPins()
+void PinsClass::init()
 {
 	pinOutput();
 	pinInput();
@@ -16,7 +16,7 @@ void PinsClass::statementPins()
 /* PRIVATE */
 void PinsClass::pinOutput()
 {
-	int size_of_array = (sizeof(pin_out) / sizeof(*pin_out));
+	const int size_of_array = (sizeof(pin_out) / sizeof(*pin_out));
 	Serial.println(size_of_array);
 	for (auto i = 0; i < size_of_array; i++)
 	{
@@ -26,7 +26,12 @@ void PinsClass::pinOutput()
 
 void PinsClass::pinInput()
 {
-	
+	const int size_of_array = (sizeof(pin_in) / sizeof(*pin_in));
+	Serial.println(size_of_array);
+	for (auto i = 0; i < size_of_array; i++)
+	{
+		pinMode(pin_in[i], INPUT);
+	}	
 }
 
 
