@@ -1,6 +1,7 @@
 /* UN GIRO DEL MOTORE SONO: 3200 step */
 /* Microsecondo 1 --> 0,001 Millisecondo */
 /* Pin Anet: https://github.com/MarlinFirmware/Marlin/blob/1.1.x/Marlin/pins_ANET_10.h */
+//#include "stepper.h"
 
 struct engine {
   int stepPin;
@@ -12,8 +13,8 @@ struct engine {
 const engine Xmotor{15, 21, 14, 18};
 const engine Ymotor{22, 23, Xmotor.enable, 19};
 const engine Zmotor{3, 2, 26, 20};
-int passi;
 
+int passi;
 void setup() {
   pinMode(15, OUTPUT);
   pinMode(21, OUTPUT);
@@ -32,9 +33,10 @@ void setup() {
 
 void loop() {
   /* MANUAL CONTROL */
-    passi = numeroStep();
-    Serial.println(passi);
-    moveEngine(Zmotor, passi);
+    //passi = numeroStep();
+    //Serial.println(passi);
+    //engine.moveZStep(passi);
+    moveEngine(Zmotor, 1);
     //moveEngine(Xmotor);
     //passi *= -1;
     //moveEngine(Ymotor);
@@ -79,9 +81,9 @@ void moveEngine(engine MoveThis, int moveStep) {
   //digitalWrite(MoveThis.enable, LOW); //Freno Motore <---
   for (int x = 0; x < moveStep; x++) {
     digitalWrite(MoveThis.stepPin, HIGH);
-    delayMicroseconds(500);
+    delayMicroseconds(70);
     digitalWrite(MoveThis.stepPin, LOW);
-    delayMicroseconds(500);
+    delayMicroseconds(70);
   }
   //digitalWrite(MoveThis.enable, HIGH);
 }
@@ -99,5 +101,4 @@ void goHome(engine MoveThis) {
     moveEngine(MoveThis, 1);
   }
 }
-
 
