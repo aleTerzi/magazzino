@@ -1,32 +1,22 @@
-// Visual Micro is in vMicro>General>Tutorial Mode
-// 
-/*
-    Name:       abos.ino
-    Created:	02/08/2018 17:20:54
-    Author:     PC-MATTEOZ\Matteo
-*/
+/* LIBRERIE */
 
-// Define User Types below here or use a .h file
-//
+#include "LCD.h"
+#include "pins.h"
+#include "menu.h"
+#include "pins.h"
 
-
-// Define Function Prototypes that use User Types below here or use a .h file
-//
-
-
-// Define Functions below here or use other .ino or cpp files
-//
-
-// The setup() function runs once each time the micro-controller starts
+/* SETUP */
 void setup()
 {
-
-
+	LCD.init();
+	LCD.printScreen(8, 1, "ABOX");
+	LCD.printScreen(0, 3, "Powered by ABOS o.s.");
+	Serial.begin(115200);
+	Serial.println("Abos is ready!!");
 }
 
-// Add the main program code into the continuous loop() function
+/* LOOP */
 void loop()
 {
-
-
+	delay(500);
 }
