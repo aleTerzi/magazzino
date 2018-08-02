@@ -16,11 +16,13 @@ class LCDClass
 {
 private:
 	LiquidCrystal Display20x4 { 28, 29, 10, 11, 16, 17 };
-	/*(28, 29, 10, 11, 16, 17)*/
  public:
 	 
 	//Create LCD
 	void init();
+
+	//Boot screen ABOS.
+	void const bootScreen();
 
 	//Set position at beginning.
 	void set();

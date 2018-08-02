@@ -1,5 +1,6 @@
 /* LIBRERIE */
 
+#include "stepper.h"
 #include "LCD.h"
 #include "pins.h"
 #include "menu.h"
@@ -9,14 +10,15 @@
 void setup()
 {
 	LCD.init();
-	LCD.printScreen(8, 1, "ABOX");
-	LCD.printScreen(0, 3, "Powered by ABOS o.s.");
+	LCD.bootScreen();
+	Stepper.init();
 	Serial.begin(115200);
 	Serial.println("Abos is ready!!");
 }
 
 /* LOOP */
 void loop()
-{
+{	
+	
 	delay(500);
 }

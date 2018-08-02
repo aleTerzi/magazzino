@@ -73,7 +73,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\abos;D:\arduino-nightly\libraries;$(ProjectDir)..\..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.21\libraries;$(ProjectDir)..\libraries;D:\arduino-nightly\hardware\anet\avr\libraries;$(ProjectDir)..\..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.21\cores\arduino;D:\arduino-nightly\hardware\anet\avr\variants\sanguino;$(ProjectDir)..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\avr\include;$(ProjectDir)..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\avr\include\avr;$(ProjectDir)..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\abos;D:\arduino-nightly\libraries\LiquidCrystal\src;D:\arduino-nightly\libraries;C:\Users\Matteo\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.21\libraries;C:\Users\Matteo\Documents\Arduino\libraries;D:\arduino-nightly\hardware\anet\avr\libraries;C:\Users\Matteo\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.21\cores\arduino;D:\arduino-nightly\hardware\anet\avr\variants\sanguino;C:\Users\Matteo\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\avr\include;C:\Users\Matteo\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\avr\include\avr;C:\Users\Matteo\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\lib\gcc\avr\4.8.1\include;C:\Users\Matteo\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\lib\gcc\avr\4.9.2\include;C:\Users\Matteo\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.4-arduino2\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.abos.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>__AVR_ATmega1284p__;__AVR_ATmega1284P__;F_CPU=16000000L;ARDUINO=10900;ARDUINO_AVR_SANGUINO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -107,7 +107,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LCD.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="pins.h" />
     <ClInclude Include="__vm\.abos.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LCD.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="pins.cpp" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
@@ -115,4 +123,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.upload.port="COM4" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

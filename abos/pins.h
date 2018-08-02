@@ -38,7 +38,7 @@ class PinsClass
 	 * 
 	 * - Y:
 	 * Stop:	19
-	 * 
+	 *
 	 * - Z:
 	 * Stop:	20
 	 * 
