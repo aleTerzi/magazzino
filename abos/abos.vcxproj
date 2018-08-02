@@ -110,12 +110,14 @@
     <ClInclude Include="LCD.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="pins.h" />
+    <ClInclude Include="stepper.h" />
     <ClInclude Include="__vm\.abos.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LCD.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="pins.cpp" />
+    <ClCompile Include="stepper.cpp" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>

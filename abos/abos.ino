@@ -1,5 +1,9 @@
 /* LIBRERIE */
 
+#include <utility.h>
+#include <unwind-cxx.h>
+#include <system_configuration.h>
+#include <StandardCplusplus.h>
 #include "stepper.h"
 #include "LCD.h"
 #include "pins.h"
@@ -21,5 +25,5 @@ void setup()
 void loop()
 {	
 	
-	delay(500);
+	delay(10);
 }
