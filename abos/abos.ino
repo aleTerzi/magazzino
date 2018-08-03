@@ -28,5 +28,7 @@ void setup()
 void loop()
 {	
 	Serial.println(LCD.readButtonValue());
+	Serial.println(analogRead(17));
+	Serial.println("-");
 	delay(50);
 }
