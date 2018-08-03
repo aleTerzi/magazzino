@@ -14,8 +14,13 @@
 
 class LCDClass
 {
-private:
 	LiquidCrystal Display20x4 { 28, 29, 10, 11, 16, 17 };
+	const int PIN_BUTTON = 17;
+	const int TOP_BUTTON = 0;
+	const int BOTTOM_BUTTON = 0;
+	const int LETH_BUTTON = 0;
+	const int RIGHT_BUTTON = 0;
+
  public:
 	 
 	//Create LCD
@@ -41,6 +46,9 @@ private:
 
 	//Print text with a given position, but before delete the previous text.
 	void printScreenAndClear(int x, int y, const String text);
+
+	//Red button value.
+	int readButtonValue();
 
 };
 

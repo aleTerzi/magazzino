@@ -47,5 +47,10 @@ void LCDClass::printScreen(int x, int y, const String text)
 	Display20x4.print(text);
 }
 
+int LCDClass::readButtonValue()
+{
+	return analogRead(PIN_BUTTON);
+}
+
 LCDClass LCD;
 
