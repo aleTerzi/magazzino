@@ -6,9 +6,8 @@
 /* PUBLIC */
 void LCDClass::init()
 {	
-	Display20x4.begin(20, 4);
+	Display20x4.begin(LCD_WIDTH, LCD_HEIGHT);
 	Display20x4.clear();
-	Display20x4.cursor();
 }
 
 void const LCDClass::bootScreen()

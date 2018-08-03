@@ -65,7 +65,9 @@ class PinsClass
 
 	/*
 	 * //L.C.D. buttons:
-	 * input pin: 17
+	 * new input pin: 17
+	 * ^ 
+	 * | old pin: 30
 	 */
 	 const unsigned short int pin_in[2] = { 17, 30 };
 

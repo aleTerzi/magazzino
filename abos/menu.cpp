@@ -8,8 +8,22 @@
 void MenuClass::init()
 {
 	inizializeDictionary();
-
 }
+
+void MenuClass::menu()
+{
+	double position = 0;
+	//int offset = 0;
+	LCD.setReset();
+	LCD.printScreen(0, 3, ">");
+	LCD.setCursor(2, 0);
+	for (auto i = 0; i < LCD.LCD_WIDTH; i++)
+	{
+		LCD.printScreen(2, i, selection_dictionary[position]);
+		position++;
+	}
+}
+
 
 /* PRIVATE */
 void MenuClass::inizializeDictionary()

@@ -22,13 +22,12 @@ void setup()
 	Stepper.init();
 	Serial.begin(115200);
 	Serial.println("Abos is ready!!");
+	delay(2000);
 }
 
 /* LOOP */
 void loop()
-{	
-	Serial.println(LCD.readButtonValue());
-	Serial.println(analogRead(17));
-	Serial.println("-");
-	delay(50);
+{
+	Menu.menu();
+	delay(5000);
 }

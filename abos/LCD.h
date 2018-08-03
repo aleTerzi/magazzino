@@ -16,14 +16,7 @@ class LCDClass
 {
 	LiquidCrystal Display20x4 { 28, 29, 10, 11, 16, 17 };
 	const int PIN_BUTTON = 17;
-	const int DEFAULT_ERROR_RANGE = 10; // 10% 
-	const int NULL_BUTTON = 1018;
-	const int TOP_BUTTON = 693;
-	const int CENTER_BUTTON = 324;
-	const int BOTTOM_BUTTON = 177;
-	const int LEFT_BUTTON = 92;
-	const int RIGHT_BUTTON = 508;
-
+	const int DEFAULT_ERROR_RANGE = 10; // 10%
 
 	// Returns element closest to target in arr[]
 	void findClosest(int arr[], int n, int target, int &result);
@@ -31,7 +24,15 @@ class LCDClass
 	/*END CREDIT*/
 
  public:
-	 
+	 const int LCD_WIDTH = 20;
+	 const int LCD_HEIGHT = 4;
+	 const int NULL_BUTTON = 1018;
+	 const int TOP_BUTTON = 693;
+	 const int CENTER_BUTTON = 324;
+	 const int BOTTOM_BUTTON = 177;
+	 const int LEFT_BUTTON = 92;
+	 const int RIGHT_BUTTON = 508;
+
 	//Create LCD
 	void init();
 
