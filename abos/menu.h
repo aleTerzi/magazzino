@@ -12,8 +12,11 @@
 class MenuClass
 {
 	/* AGGIUNGERE NELLA DOCUMENTAZIONE DI INSERIRE STL PER ARDUINO*/
-	std::map<float, String> selection_dictionary;
- public:
+	//Dictionary for search in the menu.
+	static std::map<float, String> selection_dictionary;
+	void inizializeDictionary();	
+	
+public:
 	void init();
 };
 
