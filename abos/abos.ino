@@ -19,6 +19,7 @@ void setup()
 	LCD.bootScreen();
 	Stepper.init();
 	Menu.init();
+	Stepper.init();
 	Serial.begin(115200);
 	Serial.println("Abos is ready!!");
 }
@@ -27,5 +28,5 @@ void setup()
 void loop()
 {	
 	Serial.println(LCD.readButtonValue());
-	delay(1000);
+	delay(50);
 }
