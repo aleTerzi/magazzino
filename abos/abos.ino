@@ -30,4 +30,5 @@ void loop()
 {
 	Menu.menu();
 	delay(5000);
+	Serial.println("LOOP");
 }

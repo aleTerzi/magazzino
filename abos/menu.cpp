@@ -12,16 +12,33 @@ void MenuClass::init()
 
 void MenuClass::menu()
 {
-	double position = 0;
+	double position = menu_start_to;
 	//int offset = 0;
+	int counter = 0;
+	bool scrool_text = true;
 	LCD.setReset();
-	LCD.printScreen(0, 3, ">");
+	LCD.printScreen(0, 0, ">");
 	LCD.setCursor(2, 0);
-	for (auto i = 0; i < LCD.LCD_WIDTH; i++)
+	for(auto i = selection_dictionary.begin(); i != selection_dictionary.end(); ++i)
 	{
-		LCD.printScreen(2, i, selection_dictionary[position]);
-		position++;
+		if(counter < LCD.LCD_HEIGHT && (position >= menu_start_to && position < menu_end_to))
+		{	
+			Serial.println(selection_dictionary[position]); // <-- NON STAMPA COSE
+			Serial.println(position);
+			if (scrool_text)
+			{
+				LCD.autoScroolLeft(2, counter, 2, selection_dictionary[position]);
+				scrool_text = false;
+			}else
+			{
+				LCD.printScreenCut(2, counter, 2, selection_dictionary[position]);
+			}
+			position = increasePositionTo(position);
+			counter++;			
+		}
 	}
+	Serial.println(selection_dictionary[3.20]);
+	Serial.println(selection_dictionary[3.30]);
 }
 
 
@@ -29,7 +46,7 @@ void MenuClass::menu()
 void MenuClass::inizializeDictionary()
 {
 	/* Errors set */
-	selection_dictionary[-1.1] = "ERRORE:";
+	selection_dictionary[-1.1] = "ERRORE SCONOSCUTO!";
 	selection_dictionary[-1.0] = "ERRORE:";
 	
 	/* Command sets */
@@ -49,21 +66,27 @@ void MenuClass::inizializeDictionary()
 	selection_dictionary[3.0] = "Muovi.";
 	selection_dictionary[3.1] = "Auto Home";
 	// - X
-	selection_dictionary[3.2] = "Muovi asse X.";
+	selection_dictionary[3.20] = "Muovi asse X.";
 	selection_dictionary[3.21] = "di 10 cm.";
 	selection_dictionary[3.22] = "di 1 cm.";
 	selection_dictionary[3.23] = "di 0.1 cm.";
 	// - Y
-	selection_dictionary[3.3] = "Move asse Y.";
+	selection_dictionary[3.30] = "Move asse Y.";
 	selection_dictionary[3.31] = "di 10 cm.";
 	selection_dictionary[3.32] = "di 1 cm.";
 	selection_dictionary[3.33] = "di 0.1 cm.";
 	// - Z
-	selection_dictionary[3.4] = "Move asse Z.";
+	selection_dictionary[3.40] = "Move asse Z.";
 	selection_dictionary[3.41] = "di 10 cm.";
 	selection_dictionary[3.42] = "di 1 cm.";
 	selection_dictionary[3.43] = "di 0.1 cm.";
 }
+
+double MenuClass::increasePositionTo(const double my_num)
+{
+	return my_num + increase_position_to;
+}
+
 
 MenuClass Menu;
 

@@ -57,6 +57,20 @@ class LCDClass
 	//Print text with a given position, but before delete the previous text.
 	void printScreenAndClear(int x, int y, const String text);
 
+	/*
+	 * Print text with a given position,
+	 * but before delete the extra text.
+	 * Set a offset with "offset".
+	 */
+	void printScreenCut(int x, int y, int offset, String text);
+
+	/*
+	 * Autoscrool a given string to left, 
+	 * with a given offset on x axis.
+	 * Need of x and y point start.
+	 */
+	void autoScroolLeft(int x, int y, int offset, String text);
+
 	//Red button value.
 	int readButtonValue();
 

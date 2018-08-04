@@ -94,6 +94,24 @@ void LCDClass::findClosest(int arr[], int n, int target, int &result)
 	}
 }
 
+void LCDClass::printScreenCut(int x, int y, int offset, String text)
+{
+	LCD.printScreen(x, y, text.substring(0, LCD_WIDTH - offset));
+}
+
+
+void LCDClass::autoScroolLeft(int x, int y, int offset, String text)
+{
+	int combo = text.length() - LCD.LCD_WIDTH + offset;
+	for(auto i = 0; i <= combo && combo > 0; i++)
+	{
+		delay(300);
+		LCD.printScreen(x, y, text.substring(i, LCD_WIDTH + i - offset));
+	}
+	printScreenCut(x, y, offset, text);
+}
+
+
 
 LCDClass LCD;
 
