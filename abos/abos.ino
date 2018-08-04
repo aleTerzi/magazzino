@@ -42,7 +42,7 @@ void loop() {
     //moveEngine(Ymotor);
   /* GO HOME */
   //Serial.print("entrato ");
-  //  goHome(Zmotor);
+    goHome(Zmotor, Xmotor);
   //goHome(Ymotor);
   //goHome(Zmotor);
   //while (readEndStop(Ymotor)) {}
@@ -80,11 +80,11 @@ void moveEngine(engine MoveThis, int moveStep, engine MoveThisX) {
   }
   //digitalWrite(MoveThis.enable, LOW); //Freno Motore <---
   for (int x = 0; x < moveStep; x++) {
-    //digitalWrite(MoveThis.stepPin, HIGH);
-    digitalWrite(MoveThisX.stepPin, HIGH);
+    digitalWrite(MoveThis.stepPin, HIGH);
+    //digitalWrite(MoveThisX.stepPin, HIGH);
     delayMicroseconds(70);
-    //digitalWrite(MoveThis.stepPin, LOW);
-    digitalWrite(MoveThisX.stepPin, LOW);
+    digitalWrite(MoveThis.stepPin, LOW);
+    //digitalWrite(MoveThisX.stepPin, LOW);
     delayMicroseconds(70);
   }
   //digitalWrite(MoveThis.enable, HIGH);
@@ -94,17 +94,17 @@ bool readEndStop(engine MoveThis) {
   //Serial.print(digitalRead(MoveThis.endStop));
   return digitalRead(MoveThis.endStop);
 }
-/*
-void goHome(engine MoveThis) {
+
+void goHome(engine MoveThis, engine MoveThisX) {
 
   while (readEndStop(MoveThis)) {
     //Serial.println("qui");
     Serial.println(MoveThis.endStop);
-    moveEngine(MoveThis, -1);
+    moveEngine(MoveThis, -1, MoveThisX);
   }
   if(!readEndStop(MoveThis)){
-    moveEngine(MoveThis, -3200);
+    moveEngine(MoveThis, -3200, MoveThisX);
     while(true){};
   };
-}*/
+}
 
