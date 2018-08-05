@@ -12,7 +12,13 @@ void MenuClass::init()
 
 void MenuClass::menu()
 {	
-	menuArrowPosition();
+	if(!menu_set)
+	{
+		menuArrowPosition();
+		return;
+	}
+	int button_input = menuArrowPosition();
+
 }
 
 
@@ -83,13 +89,13 @@ void MenuClass::menuSet()
 	}
 }
 
-void MenuClass::menuArrowPosition()
+int MenuClass::menuArrowPosition()
 {
 	menuWelcomeText();
 	int button_input = LCD.readButtonValue();
 	if (button_input == LCD.NULL_BUTTON)
-		return;
-	if (button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - 1)
+		return LCD.NULL_BUTTON;
+	if (button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - 1 /* - offset */)
 	{
 		menu_arrow_start++;
 	}
@@ -101,6 +107,7 @@ void MenuClass::menuArrowPosition()
 	LCD.setReset();
 	LCD.printScreen(0, menu_arrow_start, ">");
 	LCD.setCursor(0, 0);
+	return button_input;
 }
 
 void MenuClass::menuWelcomeText()

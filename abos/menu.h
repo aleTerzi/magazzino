@@ -26,7 +26,8 @@ class MenuClass
 	//Menu functions.
 	void menuSet();
 	void menuWelcomeText();
-	void menuArrowPosition();
+	int menuArrowPosition();
+
 	double increasePositionTo(const double my_num);
 	
 public:
