@@ -16,11 +16,16 @@ class MenuClass
 	//Dictionary for search in the menu.
 	std::map<double, String> selection_dictionary;
 	void inizializeDictionary();	
+	double returnEndOfDictionary();
+	double returnBeginOfDictionary();
 
 	//Menu configuration.
 	double increase_position_to = 0.1;
-	int menu_start_to = 3;
-	int menu_end_to = 4;
+	const double MENU_START = 1;
+	double MENU_MAX_END;
+	double menu_start_to;
+	double menu_end_to;
+	
 	//Menu functions.
 	double increasePositionTo(const double my_num);
 	

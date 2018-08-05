@@ -102,7 +102,7 @@ void LCDClass::printScreenCut(int x, int y, int offset, String text)
 
 void LCDClass::autoScroolLeft(int x, int y, int offset, String text)
 {
-	int combo = text.length() - LCD.LCD_WIDTH + offset;
+	int combo = text.length() - LCD.LCD_WIDTH + offset + 1;
 	for(auto i = 0; i <= combo && combo > 0; i++)
 	{
 		delay(300);

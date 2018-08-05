@@ -8,10 +8,13 @@
 void MenuClass::init()
 {
 	inizializeDictionary();
+	menu_start_to = 3;
+	menu_end_to = returnEndOfDictionary();
+	MENU_MAX_END = returnEndOfDictionary();
 }
 
 void MenuClass::menu()
-{
+{	
 	double position = menu_start_to;
 	//int offset = 0;
 	int counter = 0;
@@ -21,24 +24,22 @@ void MenuClass::menu()
 	LCD.setCursor(2, 0);
 	for(auto i = selection_dictionary.begin(); i != selection_dictionary.end(); ++i)
 	{
-		if(counter < LCD.LCD_HEIGHT && (position >= menu_start_to && position < menu_end_to))
+		if(counter < LCD.LCD_HEIGHT && (position > MENU_START || position+1 == increasePositionTo(position)) && position < MENU_MAX_END)
 		{	
-			Serial.println(selection_dictionary[position]); // <-- NON STAMPA COSE
-			Serial.println(position);
 			if (scrool_text)
 			{
 				LCD.autoScroolLeft(2, counter, 2, selection_dictionary[position]);
 				scrool_text = false;
-			}else
-			{
+			}
+			else {
+				Serial.println(selection_dictionary[position]);
 				LCD.printScreenCut(2, counter, 2, selection_dictionary[position]);
 			}
-			position = increasePositionTo(position);
+			Serial.println(position);
 			counter++;			
 		}
+		position = increasePositionTo(position);
 	}
-	Serial.println(selection_dictionary[3.20]);
-	Serial.println(selection_dictionary[3.30]);
 }
 
 
@@ -86,6 +87,19 @@ double MenuClass::increasePositionTo(const double my_num)
 {
 	return my_num + increase_position_to;
 }
+
+double MenuClass::returnEndOfDictionary()
+{
+	std::map<double, String>::reverse_iterator my_iterator = selection_dictionary.rbegin();
+	return my_iterator->first;
+}
+
+double MenuClass::returnBeginOfDictionary()
+{
+	std::map<double, String>::iterator my_iterator = selection_dictionary.begin();
+	return my_iterator->first;
+}
+
 
 
 MenuClass Menu;
