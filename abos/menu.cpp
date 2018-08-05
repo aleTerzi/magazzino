@@ -12,22 +12,7 @@ void MenuClass::init()
 
 void MenuClass::menu()
 {	
-	int button_input = LCD.readButtonValue();
-	menuSet();
-	if(button_input == LCD.NULL_BUTTON)
-		return;
-
-	if(button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - 1)
-	{
-		menu_arrow_start++;
-	}else if(button_input == LCD.TOP_BUTTON && menu_arrow_start > 0)
-	{
-		menu_arrow_start--;
-	}
-	Serial.println(menu_arrow_start);
-	LCD.setReset();
-	LCD.printScreen(0, menu_arrow_start, ">");
-	//LCD.setCursor(2, 0);
+	menuArrowPosition();
 }
 
 
@@ -40,7 +25,7 @@ void MenuClass::inizializeDictionary()
 	
 	/* Command sets */
 	selection_dictionary[0.0] = "Premi un tasto per iniziare!";
-	selection_dictionary[0.1] = "ATTENDI";
+	selection_dictionary[0.0] = "ATTENDI";
 
 	/* Add item */
 	selection_dictionary[1.0] = "Aggiungi un oggetto.";
@@ -98,6 +83,36 @@ void MenuClass::menuSet()
 	}
 }
 
+void MenuClass::menuArrowPosition()
+{
+	menuWelcomeText();
+	int button_input = LCD.readButtonValue();
+	if (button_input == LCD.NULL_BUTTON)
+		return;
+	if (button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - 1)
+	{
+		menu_arrow_start++;
+	}
+	else if (button_input == LCD.TOP_BUTTON && menu_arrow_start > 0)
+	{
+		menu_arrow_start--;
+	}
+	Serial.println(menu_arrow_start);
+	LCD.setReset();
+	LCD.printScreen(0, menu_arrow_start, ">");
+	LCD.setCursor(0, 0);
+}
+
+void MenuClass::menuWelcomeText()
+{
+	if(!menu_set)
+		return;
+	LCD.setReset();
+	LCD.printScreen(1, 1, "Premi un tasto");
+	LCD.printScreen(6, 2, "per iniziare!");
+	if(LCD.readButtonValue() != LCD.NULL_BUTTON)
+		menuSet();
+}
 
 MenuClass Menu;
 
