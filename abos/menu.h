@@ -20,8 +20,11 @@ class MenuClass
 	double returnBeginOfDictionary();
 
 	//Menu configuration.
+	int menu_arrow_start = 0;
+	bool menu_set = true;
 
 	//Menu functions.
+	void menuSet();
 	double increasePositionTo(const double my_num);
 	
 public:

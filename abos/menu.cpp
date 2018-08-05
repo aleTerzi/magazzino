@@ -12,9 +12,22 @@ void MenuClass::init()
 
 void MenuClass::menu()
 {	
-	
-	LCD.printScreen(0, 0, ">");
-	LCD.setCursor(2, 0);
+	int button_input = LCD.readButtonValue();
+	menuSet();
+	if(button_input == LCD.NULL_BUTTON)
+		return;
+
+	if(button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - 1)
+	{
+		menu_arrow_start++;
+	}else if(button_input == LCD.TOP_BUTTON && menu_arrow_start > 0)
+	{
+		menu_arrow_start--;
+	}
+	Serial.println(menu_arrow_start);
+	LCD.setReset();
+	LCD.printScreen(0, menu_arrow_start, ">");
+	//LCD.setCursor(2, 0);
 }
 
 
@@ -75,6 +88,15 @@ double MenuClass::returnBeginOfDictionary()
 	return my_iterator->first;
 }
 
+void MenuClass::menuSet()
+{
+	if(menu_set)
+	{
+		menu_set = false;
+		LCD.setReset();
+		LCD.printScreen(0, 0, ">");
+	}
+}
 
 
 MenuClass Menu;

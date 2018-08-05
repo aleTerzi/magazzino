@@ -29,6 +29,6 @@ void setup()
 void loop()
 {
 	Menu.menu();
-	delay(5000);
+	delay(50);
 	Serial.println("LOOP");
 }
