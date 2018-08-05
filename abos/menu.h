@@ -20,12 +20,7 @@ class MenuClass
 	double returnBeginOfDictionary();
 
 	//Menu configuration.
-	double increase_position_to = 0.1;
-	const double MENU_START = 1;
-	double MENU_MAX_END;
-	double menu_start_to;
-	double menu_end_to;
-	
+
 	//Menu functions.
 	double increasePositionTo(const double my_num);
 	

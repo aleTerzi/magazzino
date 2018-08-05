@@ -8,38 +8,13 @@
 void MenuClass::init()
 {
 	inizializeDictionary();
-	menu_start_to = 3;
-	menu_end_to = returnEndOfDictionary();
-	MENU_MAX_END = returnEndOfDictionary();
 }
 
 void MenuClass::menu()
 {	
-	double position = menu_start_to;
-	//int offset = 0;
-	int counter = 0;
-	bool scrool_text = true;
-	LCD.setReset();
+	
 	LCD.printScreen(0, 0, ">");
 	LCD.setCursor(2, 0);
-	for(auto i = selection_dictionary.begin(); i != selection_dictionary.end(); ++i)
-	{
-		if(counter < LCD.LCD_HEIGHT && (position > MENU_START || position+1 == increasePositionTo(position)) && position < MENU_MAX_END)
-		{	
-			if (scrool_text)
-			{
-				LCD.autoScroolLeft(2, counter, 2, selection_dictionary[position]);
-				scrool_text = false;
-			}
-			else {
-				Serial.println(selection_dictionary[position]);
-				LCD.printScreenCut(2, counter, 2, selection_dictionary[position]);
-			}
-			Serial.println(position);
-			counter++;			
-		}
-		position = increasePositionTo(position);
-	}
 }
 
 
@@ -85,7 +60,7 @@ void MenuClass::inizializeDictionary()
 
 double MenuClass::increasePositionTo(const double my_num)
 {
-	return my_num + increase_position_to;
+	//return my_num + increase_position_to;
 }
 
 double MenuClass::returnEndOfDictionary()
