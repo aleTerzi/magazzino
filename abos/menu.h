@@ -21,6 +21,7 @@ class MenuClass
 
 	//Menu configuration.
 	int menu_arrow_start = 0;
+	int menu_arrow_offset = 0;
 	bool menu_set = true;
 	int menu_position = 1;
 

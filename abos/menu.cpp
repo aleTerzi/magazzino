@@ -27,6 +27,7 @@ void MenuClass::menu()
 		menu_print++;
 		i++;
 	}
+	menu_arrow_offset = LCD.LCD_HEIGHT - i;
 	if (button_input == LCD.RIGHT_BUTTON)
 		menuGoToSon();
 	else if (button_input == LCD.LEFT_BUTTON)
@@ -115,7 +116,7 @@ int MenuClass::menuArrowPosition()
 		return LCD.NULL_BUTTON;
 	}
 		
-	if (button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - 1 /* - offset */)
+	if (button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - menu_arrow_offset - 1)
 	{
 		menu_arrow_start++;
 	}
