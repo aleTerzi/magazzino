@@ -73,7 +73,13 @@ class LCDClass
 
 	//Red button value.
 	int readButtonValue();
+	/*
+	//Set cursor visible.
+	void setCursorVisible();
 
+	//Set cursor invisible.
+	void setCursorInvisible();
+	*/
 };
 
 extern LCDClass LCD;

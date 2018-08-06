@@ -22,13 +22,14 @@ class MenuClass
 	//Menu configuration.
 	int menu_arrow_start = 0;
 	bool menu_set = true;
+	int menu_position = 1;
 
 	//Menu functions.
 	void menuSet();
 	void menuWelcomeText();
 	int menuArrowPosition();
-
-	double increasePositionTo(const double my_num);
+	void menuGoToSon();
+	void menuGoToParent();
 	
 public:
 	void init();

@@ -12,13 +12,30 @@ void MenuClass::init()
 
 void MenuClass::menu()
 {	
-	if(!menu_set)
+	if(menu_set)
 	{
 		menuArrowPosition();
 		return;
 	}
-	int button_input = menuArrowPosition();
-
+	const auto button_input = menuArrowPosition();
+	auto i = 0;
+	auto menu_print = menu_position;
+	while (selection_dictionary.find(menu_print) != selection_dictionary.end()  && i < LCD.LCD_HEIGHT)
+	{
+		Serial.println(i);
+		LCD.printScreenCut(2, i, 2, selection_dictionary[menu_print]);
+		menu_print++;
+		i++;
+	}
+	if (button_input == LCD.RIGHT_BUTTON)
+		menuGoToSon();
+	else if (button_input == LCD.LEFT_BUTTON)
+		menuGoToParent();
+	else if (button_input == LCD.CENTER_BUTTON)
+		menu_position = 1;
+	Serial.println(menu_position);
+	if(button_input != LCD.NULL_BUTTON)
+		LCD.setReset();
 }
 
 
@@ -30,8 +47,8 @@ void MenuClass::inizializeDictionary()
 	//selection_dictionary[-1.0] = "ERRORE:";
 	
 	/* Command sets */
-	selection_dictionary[0.0] = "Premi un tasto per iniziare!";
-	selection_dictionary[0.1] = "ATTENDI";
+	//selection_dictionary[0.0] = "Premi un tasto per iniziare!";
+	//selection_dictionary[0.1] = "ATTENDI";
 
 	/* Add item */
 	selection_dictionary[1] = "Aggiungi un oggetto.";
@@ -62,11 +79,6 @@ void MenuClass::inizializeDictionary()
 	selection_dictionary[332] = "di 0.1 cm.";
 }
 
-double MenuClass::increasePositionTo(const double my_num)
-{
-	//return my_num + increase_position_to;
-}
-
 double MenuClass::returnEndOfDictionary()
 {
 	std::map<unsigned int, String>::reverse_iterator my_iterator = selection_dictionary.rbegin();
@@ -94,7 +106,15 @@ int MenuClass::menuArrowPosition()
 	menuWelcomeText();
 	int button_input = LCD.readButtonValue();
 	if (button_input == LCD.NULL_BUTTON)
+	{
+		if(!menu_set)
+		{
+			LCD.printScreen(0, menu_arrow_start, ">");
+			LCD.setCursor(0, 0);
+		}
 		return LCD.NULL_BUTTON;
+	}
+		
 	if (button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - 1 /* - offset */)
 	{
 		menu_arrow_start++;
@@ -104,9 +124,14 @@ int MenuClass::menuArrowPosition()
 		menu_arrow_start--;
 	}
 	Serial.println(menu_arrow_start);
-	LCD.setReset();
+	/*
+	 if(button_input != LCD.NULL_BUTTON)
+		LCD.setReset();
+	*/
 	LCD.printScreen(0, menu_arrow_start, ">");
 	LCD.setCursor(0, 0);
+	Serial.print("Arrow: ");
+	Serial.println(menu_arrow_start);
 	return button_input;
 }
 
@@ -120,6 +145,23 @@ void MenuClass::menuWelcomeText()
 	if(LCD.readButtonValue() != LCD.NULL_BUTTON)
 		menuSet();
 }
+
+void MenuClass::menuGoToSon()
+{
+	if(selection_dictionary.find(menu_position * 10) == selection_dictionary.end())
+		return;
+	menu_position *= 10;
+	menu_arrow_start = 0;
+}
+
+void MenuClass::menuGoToParent()
+{
+	if(float(menu_position / 10) <= 0)
+		return;
+	menu_position /= 10;
+	menu_arrow_start = 0;
+}
+
 
 MenuClass Menu;
 
