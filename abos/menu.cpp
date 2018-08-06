@@ -26,40 +26,40 @@ void MenuClass::menu()
 void MenuClass::inizializeDictionary()
 {
 	/* Errors set */
-	selection_dictionary[-1.1] = "ERRORE SCONOSCUTO!";
-	selection_dictionary[-1.0] = "ERRORE:";
+	//selection_dictionary[-1.1] = "ERRORE SCONOSCUTO!";
+	//selection_dictionary[-1.0] = "ERRORE:";
 	
 	/* Command sets */
 	selection_dictionary[0.0] = "Premi un tasto per iniziare!";
-	selection_dictionary[0.0] = "ATTENDI";
+	selection_dictionary[0.1] = "ATTENDI";
 
 	/* Add item */
-	selection_dictionary[1.0] = "Aggiungi un oggetto.";
-	selection_dictionary[1.1] = "Primo spazio libero.";
-	selection_dictionary[1.2] = "Spazio a scelta.";
+	selection_dictionary[1] = "Aggiungi un oggetto.";
+	selection_dictionary[10] = "Primo spazio libero.";
+	selection_dictionary[11] = "Spazio a scelta.";
 
 	/* Remove item */
-	selection_dictionary[2.0] = "Riumuovi un oggetto.";
-	selection_dictionary[2.1] = "Selezione l'oggetto.";
+	selection_dictionary[2] = "Riumuovi un oggetto.";
+	selection_dictionary[20] = "Selezione l'oggetto.";
 
 	/* Move axis */
-	selection_dictionary[3.0] = "Muovi.";
-	selection_dictionary[3.1] = "Auto Home";
+	selection_dictionary[3] = "Muovi.";
+	selection_dictionary[30] = "Auto Home";
 	// - X
-	selection_dictionary[3.20] = "Muovi asse X.";
-	selection_dictionary[3.21] = "di 10 cm.";
-	selection_dictionary[3.22] = "di 1 cm.";
-	selection_dictionary[3.23] = "di 0.1 cm.";
+	selection_dictionary[31] = "Muovi asse X.";
+	selection_dictionary[310] = "di 10 cm.";
+	selection_dictionary[311] = "di 1 cm.";
+	selection_dictionary[312] = "di 0.1 cm.";
 	// - Y
-	selection_dictionary[3.30] = "Move asse Y.";
-	selection_dictionary[3.31] = "di 10 cm.";
-	selection_dictionary[3.32] = "di 1 cm.";
-	selection_dictionary[3.33] = "di 0.1 cm.";
+	selection_dictionary[32] = "Move asse Y.";
+	selection_dictionary[320] = "di 10 cm.";
+	selection_dictionary[321] = "di 1 cm.";
+	selection_dictionary[323] = "di 0.1 cm.";
 	// - Z
-	selection_dictionary[3.40] = "Move asse Z.";
-	selection_dictionary[3.41] = "di 10 cm.";
-	selection_dictionary[3.42] = "di 1 cm.";
-	selection_dictionary[3.43] = "di 0.1 cm.";
+	selection_dictionary[33] = "Move asse Z.";
+	selection_dictionary[330] = "di 10 cm.";
+	selection_dictionary[331] = "di 1 cm.";
+	selection_dictionary[332] = "di 0.1 cm.";
 }
 
 double MenuClass::increasePositionTo(const double my_num)
@@ -69,13 +69,13 @@ double MenuClass::increasePositionTo(const double my_num)
 
 double MenuClass::returnEndOfDictionary()
 {
-	std::map<double, String>::reverse_iterator my_iterator = selection_dictionary.rbegin();
+	std::map<unsigned int, String>::reverse_iterator my_iterator = selection_dictionary.rbegin();
 	return my_iterator->first;
 }
 
 double MenuClass::returnBeginOfDictionary()
 {
-	std::map<double, String>::iterator my_iterator = selection_dictionary.begin();
+	std::map<unsigned int, String>::iterator my_iterator = selection_dictionary.begin();
 	return my_iterator->first;
 }
 
