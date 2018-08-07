@@ -33,10 +33,10 @@ void setup() {
 
 void loop() {
   /* MANUAL CONTROL */
-    //passi = numeroStep();
-    //Serial.println(passi);
+    passi = numeroStep();
+    Serial.println(passi);
     //engine.moveZStep(passi);
-    moveEngine(Zmotor, 1, Xmotor);
+    moveEngine(Zmotor, passi, Xmotor);
     //moveEngine(Xmotor);
     //passi *= -1;
     //moveEngine(Ymotor);
@@ -80,11 +80,11 @@ void moveEngine(engine MoveThis, int moveStep, engine MoveThisX) {
   }
   //digitalWrite(MoveThis.enable, LOW); //Freno Motore <---
   for (int x = 0; x < moveStep; x++) {
-    //digitalWrite(MoveThis.stepPin, HIGH);
-    digitalWrite(MoveThisX.stepPin, HIGH);
+    digitalWrite(MoveThis.stepPin, HIGH);
+    //digitalWrite(MoveThisX.stepPin, HIGH);
     delayMicroseconds(70);
-    //digitalWrite(MoveThis.stepPin, LOW);
-    digitalWrite(MoveThisX.stepPin, LOW);
+    digitalWrite(MoveThis.stepPin, LOW);
+    //digitalWrite(MoveThisX.stepPin, LOW);
     delayMicroseconds(70);
   }
   //digitalWrite(MoveThis.enable, HIGH);
