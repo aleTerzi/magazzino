@@ -14,10 +14,11 @@ void StepperClass::init()
 
 void StepperClass::tryThsi()
 {
-	cmToStep(z_stepper_motor, 1);
-	moveStepper(z_stepper_motor);
-	cmToStep(z_stepper_motor, -1);
-	moveStepper(z_stepper_motor);
+	cmToStep(y_stepper_motor, 10);
+	moveStepper(y_stepper_motor);
+	delay(5000);
+	//cmToStep(y_stepper_motor, -1);
+	//moveStepper(y_stepper_motor);
 }
 
 

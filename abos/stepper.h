@@ -86,8 +86,8 @@ class StepperClass
 	 * 
 	 */
 	stepperMotor x_stepper_motor = {15,21,14,18,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT};
-	stepperMotor y_stepper_motor = {22,23,14,19,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT };
-	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT };
+	stepperMotor y_stepper_motor = {22,23,14,19,true,0,true,true,DEFAULT_SPEED,4.13};
+	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT};
 
 	//Set default statistics for stepper.
 	//void defaultStepperSet(stepperMotor& my_stepper, int line);
