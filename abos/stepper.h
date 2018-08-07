@@ -12,14 +12,21 @@
 class StepperClass
 {
 	const short int ONE_ROTATION_STEPS = 3200;
-	const float DEFAULT_SHIFT = 0;
-	const short int DEFAULT_SPEED = 300;	
+	const float DEFAULT_SHIFT = 0.1;
+	const short int DEFAULT_SPEED = 70;	
 
 	struct stepperMotor
 	{
 		const byte STEPPER_PIN;
 		const byte DIRECTION_PIN;
 		const byte ENABLE_PIN;
+		const byte STOP_PIN;
+		/*
+		* Direction of rotation:
+		* TRUE --> clockwise.
+		* FALSE --> counterclockwise.
+		*/
+		bool DEFAULT_ROTATION;
 
 		//Number of steps to be taken at the next cycle.
 		byte stepper;
@@ -65,15 +72,35 @@ class StepperClass
 	 * Dir:		2
 	 * 
 	 * Z-Enable:	26
+	 * 
+	 * * //Stop:
+	 * - X:
+	 * Stop:	18 
+	 * 
+	 * - Y:
+	 * Stop:	19
+	 * 
+	 * - Z:
+	 * Stop:	20
+	 * 
 	 */
-	stepperMotor x_stepper_motor_ = { 15, 21, 14 };
-	stepperMotor y_stepper_motor_ = { 21, 23, x_stepper_motor_.enable };
-	stepperMotor z_stepper_motor_ = { 3,2,26 };
+	stepperMotor x_stepper_motor_ = { 15, 21, 14, 18 };
+	stepperMotor y_stepper_motor_ = { 21, 23, x_stepper_motor_.enable, 19 };
+	stepperMotor z_stepper_motor_ = { 3, 2, 26, 20 };
 
 	//Set default statistics for stepper.
-	void defaultStepperSet(stepperMotor &myStepper);
+	void defaultStepperSet(stepperMotor& my_stepper);
+
+	void cmToStep(stepperMotor& my_stepper, int space);
+
+	void hitStopForResetPosition(stepperMotor move_this);
+
+	void moveStepper(stepperMotor& move_this);
+
  public:
 	void init();
+
+	void autoHome();
 };
 
 extern StepperClass Stepper;

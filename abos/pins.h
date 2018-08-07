@@ -32,18 +32,6 @@ class PinsClass
 	 * 
 	 * ----------------------
 	 * 
-	 * //Stop:
-	 * - X:
-	 * Stop:	18
-	 * 
-	 * - Y:
-	 * Stop:	19
-	 *
-	 * - Z:
-	 * Stop:	20
-	 * 
-	 * ----------------------
-	 * 
 	 * //L.C.D.:
 	 * rs:		28 
 	 * enable:	29
@@ -68,8 +56,21 @@ class PinsClass
 	 * new input pin: 17
 	 * ^ 
 	 * | old pin: 30
+	 * 
+	 * ----------------------
+	 * 
+	 * //Stop:
+	 * - X:
+	 * Stop:	18
+	 * 
+	 * - Y:
+	 * Stop:	19
+	 *
+	 * - Z:
+	 * Stop:	20
+	 * 
 	 */
-	 const unsigned short int pin_in[2] = { 17, 30 };
+	 const unsigned short int pin_in[5] = { 17, 30, 18, 19, 20 };
 
 	//Declaration pin input:
 	 void pinInput();
