@@ -82,12 +82,14 @@ void MenuClass::inizializeDictionary()
 
 double MenuClass::returnEndOfDictionary()
 {
-	std::map<unsigned int, String>::reverse_iterator my_iterator = selection_dictionary.rbegin();
+	//Puntatori a mappa/dizionario dalla fine.
+	std::map<unsigned int, String>::reverse_iterator my_iterator = selection_dictionary.rbegin(); 
 	return my_iterator->first;
 }
 
 double MenuClass::returnBeginOfDictionary()
 {
+	//Puntatori a mappa/dizionario dall'inizio.
 	std::map<unsigned int, String>::iterator my_iterator = selection_dictionary.begin();
 	return my_iterator->first;
 }
@@ -108,14 +110,16 @@ int MenuClass::menuArrowPosition()
 	int button_input = LCD.readButtonValue();
 	if (button_input == LCD.NULL_BUTTON)
 	{
-		if(!menu_set)
+		//menu_set è falso quando si è entrati nel menu.
+		if(!menu_set) 
 		{
 			LCD.printScreen(0, menu_arrow_start, ">");
 			LCD.setCursor(0, 0);
 		}
 		return LCD.NULL_BUTTON;
 	}
-		
+	
+	//If to set the arrow only in the full display lines.
 	if (button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - menu_arrow_offset - 1)
 	{
 		menu_arrow_start++;
@@ -124,7 +128,7 @@ int MenuClass::menuArrowPosition()
 	{
 		menu_arrow_start--;
 	}
-	Serial.println(menu_arrow_start);
+	//Serial.println(menu_arrow_start);
 	/*
 	 if(button_input != LCD.NULL_BUTTON)
 		LCD.setReset();

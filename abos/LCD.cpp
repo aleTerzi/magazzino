@@ -50,7 +50,7 @@ int LCDClass::readButtonValue()
 {
 	int result;;
 	int myValue = analogRead(PIN_BUTTON);
-	int min_value = myValue - myValue * DEFAULT_ERROR_RANGE / 100;
+	int min_value = myValue - myValue * DEFAULT_ERROR_RANGE / 100; //the min value is equal to the 90% of the standard one
 	if(myValue < NULL_BUTTON)
 	{
 		if ( min_value <= LEFT_BUTTON)

@@ -25,10 +25,16 @@ class MenuClass
 	bool menu_set = true;
 	int menu_position = 1;
 
-	//Menu functions.
+	/* MENU FUNCTIONS */
+
+	//Arrow's initialization.
 	void menuSet();
+
 	void menuWelcomeText();
+
+	//Arrow's movement
 	int menuArrowPosition();
+
 	void menuGoToSon();
 	void menuGoToParent();
 	
