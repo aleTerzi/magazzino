@@ -12,8 +12,8 @@
 class StepperClass
 {
 	const short int ONE_ROTATION_STEPS = 3200;
-	const float DEFAULT_SHIFT = 0.1;
-	const short int DEFAULT_SPEED = 70;	
+	const double DEFAULT_SHIFT = 0.12;
+	const short int DEFAULT_SPEED =70;	
 
 	struct stepperMotor
 	{
@@ -21,6 +21,7 @@ class StepperClass
 		const byte DIRECTION_PIN;
 		const byte ENABLE_PIN;
 		const byte STOP_PIN;
+
 		/*
 		* Direction of rotation:
 		* TRUE --> clockwise.
@@ -29,7 +30,7 @@ class StepperClass
 		bool DEFAULT_ROTATION;
 
 		//Number of steps to be taken at the next cycle.
-		byte stepper;
+		long int stepper;
 
 		/*
 		 * Direction of rotation:
@@ -84,12 +85,12 @@ class StepperClass
 	 * Stop:	20
 	 * 
 	 */
-	stepperMotor x_stepper_motor_ = { 15, 21, 14, 18 };
-	stepperMotor y_stepper_motor_ = { 21, 23, x_stepper_motor_.enable, 19 };
-	stepperMotor z_stepper_motor_ = { 3, 2, 26, 20 };
+	stepperMotor x_stepper_motor = {15,21,14,18,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT};
+	stepperMotor y_stepper_motor = {22,23,14,19,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT };
+	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT };
 
 	//Set default statistics for stepper.
-	void defaultStepperSet(stepperMotor& my_stepper);
+	//void defaultStepperSet(stepperMotor& my_stepper, int line);
 
 	void cmToStep(stepperMotor& my_stepper, int space);
 
@@ -97,10 +98,13 @@ class StepperClass
 
 	void moveStepper(stepperMotor& move_this);
 
+
  public:
 	void init();
 
 	void autoHome();
+
+	void tryThsi();
 };
 
 extern StepperClass Stepper;

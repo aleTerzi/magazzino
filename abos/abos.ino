@@ -14,21 +14,22 @@
 /* SETUP */
 void setup()
 {
+	Serial.begin(115200);
+	Serial.println("Abos is ready!!");
 	Pins.init();
 	LCD.init();
 	LCD.bootScreen();
 	Stepper.init();
 	Menu.init();
-	Stepper.init();
-	Serial.begin(115200);
-	Serial.println("Abos is ready!!");
+	Stepper.init();	
 	delay(2000);
 }
 
 /* LOOP */
 void loop()
 {
-	Menu.menu();
-	delay(50);
+	//Menu.menu();
+	Stepper.tryThsi();
+	delay(5000);
 	Serial.println("LOOP");
 }
