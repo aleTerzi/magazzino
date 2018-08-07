@@ -22,7 +22,7 @@ void MenuClass::menu()
 	auto menu_print = menu_position;
 	while (selection_dictionary.find(menu_print) != selection_dictionary.end()  && i < LCD.LCD_HEIGHT)
 	{
-		Serial.println(i);
+		//Serial.println(i);
 		LCD.printScreenCut(2, i, 2, selection_dictionary[menu_print]);
 		menu_print++;
 		i++;
@@ -131,8 +131,8 @@ int MenuClass::menuArrowPosition()
 	*/
 	LCD.printScreen(0, menu_arrow_start, ">");
 	LCD.setCursor(0, 0);
-	Serial.print("Arrow: ");
-	Serial.println(menu_arrow_start);
+	//Serial.print("Arrow: ");
+	//Serial.println(menu_arrow_start);
 	return button_input;
 }
 
@@ -149,9 +149,9 @@ void MenuClass::menuWelcomeText()
 
 void MenuClass::menuGoToSon()
 {
-	if(selection_dictionary.find(menu_position * 10) == selection_dictionary.end())
+	if(selection_dictionary.find((menu_position + menu_arrow_start) * 10) == selection_dictionary.end())
 		return;
-	menu_position *= 10;
+	menu_position = (menu_position  + menu_arrow_start) * 10;
 	menu_arrow_start = 0;
 }
 
@@ -160,6 +160,16 @@ void MenuClass::menuGoToParent()
 	if(float(menu_position / 10) <= 0)
 		return;
 	menu_position /= 10;
+	
+	if(menu_position > 10)
+	{
+		while (menu_position % 10 != 0)
+			menu_position--;
+	}else
+	{
+		menu_position = 1;
+	}
+	//Serial.print(menu_position);
 	menu_arrow_start = 0;
 }
 
