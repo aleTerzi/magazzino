@@ -37,6 +37,7 @@ class MenuClass
 
 	void menuGoToSon();
 	void menuGoToParent();
+	void menuGoToHome();
 	
 public:
 	void init();

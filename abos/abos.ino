@@ -30,6 +30,6 @@ void loop()
 {
 	Menu.menu();
 	//Stepper.tryThsi();
-	delay(5000);
+	//delay(5000);
 	Serial.println("LOOP");
 }

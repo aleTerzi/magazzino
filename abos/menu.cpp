@@ -26,6 +26,7 @@ void MenuClass::menu()
 		LCD.printScreenCut(2, i, 2, selection_dictionary[menu_print]);
 		menu_print++;
 		i++;
+		Serial.println(menu_print);
 	}
 	menu_arrow_offset = LCD.LCD_HEIGHT - i;
 	if (button_input == LCD.RIGHT_BUTTON)
@@ -33,7 +34,7 @@ void MenuClass::menu()
 	else if (button_input == LCD.LEFT_BUTTON)
 		menuGoToParent();
 	else if (button_input == LCD.CENTER_BUTTON)
-		menu_position = 1;
+		menuGoToHome();
 	Serial.println(menu_position);
 	if(button_input != LCD.NULL_BUTTON)
 		LCD.setReset();
@@ -72,7 +73,7 @@ void MenuClass::inizializeDictionary()
 	selection_dictionary[32] = "Move asse Y.";
 	selection_dictionary[320] = "di 10 cm.";
 	selection_dictionary[321] = "di 1 cm.";
-	selection_dictionary[323] = "di 0.1 cm.";
+	selection_dictionary[322] = "di 0.1 cm.";
 	// - Z
 	selection_dictionary[33] = "Move asse Z.";
 	selection_dictionary[330] = "di 10 cm.";
@@ -147,6 +148,7 @@ void MenuClass::menuWelcomeText()
 	LCD.setReset();
 	LCD.printScreen(1, 1, "Premi un tasto");
 	LCD.printScreen(6, 2, "per iniziare!");
+	delay(100);
 	if(LCD.readButtonValue() != LCD.NULL_BUTTON)
 		menuSet();
 }
@@ -176,6 +178,13 @@ void MenuClass::menuGoToParent()
 	//Serial.print(menu_position);
 	menu_arrow_start = 0;
 }
+
+void MenuClass::menuGoToHome()
+{
+	menu_position = 1;
+	menu_arrow_start = 0;
+}
+
 
 
 MenuClass Menu;
