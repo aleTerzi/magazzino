@@ -23,7 +23,14 @@ bool StepperClass::useStepper()
 {
 	if(Menu.statusMenu())
 	{
-		if (Menu.outputMenu() == 30)
+		engineBrakeOn();
+		const int go_here = Menu.outputMenu();
+		if(go_here == 4)
+		{
+			engineBrakeOff();
+			return true;
+		}
+		if (go_here == 30)
 		{
 			Serial.println("Sono qui");
 			Menu.outputMenuWithText();
@@ -31,52 +38,52 @@ bool StepperClass::useStepper()
 			//delay(5000);
 			return true;
 		}
-		if (Menu.outputMenu() == 310)
+		if (go_here == 310)
 		{
 			moveWithButton(x_stepper_motor, 10);
 			return true;
 		}
-		if (Menu.outputMenu() == 311)
+		if (go_here == 311)
 		{
 			moveWithButton(x_stepper_motor, 1);
 			return true;
 		}
-		if (Menu.outputMenu() == 312)
+		if (go_here == 312)
 		{
 			moveWithButton(x_stepper_motor, 0.1);
 			return true;
 		}
-		if (Menu.outputMenu() == 320)
+		if (go_here == 320)
 		{
 			moveWithButton(y_stepper_motor, 10);
 			return true;
 		}
-		if (Menu.outputMenu() == 321)
+		if (go_here == 321)
 		{
 			moveWithButton(y_stepper_motor, 1);
 			return true;
 		}
-		if (Menu.outputMenu() == 322)
+		if (go_here == 322)
 		{
 			moveWithButton(y_stepper_motor, 0.1);
 			return true;
 		}
-		if (Menu.outputMenu() == 330)
+		if (go_here == 330)
 		{
 			moveWithButton(z_stepper_motor, 10);
 			return true;
 		}
-		if (Menu.outputMenu() == 331)
+		if (go_here == 331)
 		{
 			moveWithButton(z_stepper_motor, 1);
 			return true;
 		}
-		if (Menu.outputMenu() == 332)
+		if (go_here == 332)
 		{
 			moveWithButton(z_stepper_motor, 0.1);
 			return true;
 		}
-	}	
+	}
 	return false;
 }
 
@@ -206,6 +213,18 @@ void StepperClass::moveWithButton(stepperMotor move_this, float unit_of_space)
 		Menu.setMenuToHome();
 	if (button_input == LCD.LEFT_BUTTON)
 		Menu.setMenuToParent();
+}
+
+void StepperClass::engineBrakeOff()
+{
+	digitalWrite(x_stepper_motor.ENABLE_PIN, HIGH);
+	digitalWrite(z_stepper_motor.ENABLE_PIN, HIGH);
+}
+
+void StepperClass::engineBrakeOn()
+{
+	digitalWrite(x_stepper_motor.ENABLE_PIN, LOW);
+	digitalWrite(z_stepper_motor.ENABLE_PIN, LOW);
 }
 
 

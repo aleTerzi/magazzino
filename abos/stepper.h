@@ -113,6 +113,9 @@ class StepperClass
 
 	void moveWithButton(stepperMotor move_this, float unit_of_space);
 
+	void engineBrakeOff();
+	void engineBrakeOn();
+
  public:
 	void init();
 	bool useStepper();

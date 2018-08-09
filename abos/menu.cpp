@@ -115,6 +115,9 @@ void MenuClass::inizializeDictionary()
 	selection_dictionary[330] = "di 10 cm.";
 	selection_dictionary[331] = "di 1 cm.";
 	selection_dictionary[332] = "di 0.1 cm.";
+	
+	/* Engine Brake */
+	selection_dictionary[4] = "Disattiva freno motore.";
 }
 
 double MenuClass::returnEndOfDictionary()

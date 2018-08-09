@@ -20,11 +20,12 @@ class MenuClass
 	double returnBeginOfDictionary();
 
 	//Menu configuration.
-	const int OUTPUT_WITH_ACTION[13] = {
+	const int OUTPUT_WITH_ACTION[14] = {
 		10, 11, 20, 
 		30, 310, 311, 
 		312, 320, 321, 
-		322, 330, 331, 332 
+		322, 330, 331,
+		332, 4
 	};
 	int menu_arrow_start = 0;
 	int menu_arrow_offset = 0;
