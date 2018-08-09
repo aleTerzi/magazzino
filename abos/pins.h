@@ -30,6 +30,12 @@ class PinsClass
 	 * 
 	 * Z-Enable:	26
 	 * 
+	 * - E:
+	 * Step:	1
+	 * Dir:		0
+	 * 
+	 * E-Enable: used Y enable.
+	 * 
 	 * ----------------------
 	 * 
 	 * //L.C.D.:

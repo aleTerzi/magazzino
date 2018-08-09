@@ -7,16 +7,32 @@
 /*PUBLIC*/
 void StepperClass::init()
 {
-	Serial.println(x_stepper_motor.STEPPER_PIN);
 	Serial.println(y_stepper_motor.STEPPER_PIN);
 	Serial.println(z_stepper_motor.STEPPER_PIN);
+	Serial.println(x_stepper_motor.STEPPER_PIN);
 }
 
 void StepperClass::tryThsi()
 {
-	cmToStep(y_stepper_motor, 10);
+	cmToStep(y_stepper_motor, -1);
 	moveStepper(y_stepper_motor);
-	delay(5000);
+	delay(500);
+	cmToStep(y_stepper_motor, 1);
+	moveStepper(y_stepper_motor);
+	delay(500);
+	//cmToStep(z_stepper_motor, 1);
+	//moveStepper(z_stepper_motor);
+	//delay(500);
+	//cmToStep(z_stepper_motor, -1);
+	//moveStepper(z_stepper_motor);
+	delay(2000);
+	
+	cmToStep(x_stepper_motor, 1);
+	moveStepper(x_stepper_motor);
+	delay(500);
+	cmToStep(x_stepper_motor, -1);
+	moveStepper(x_stepper_motor);
+	
 	//cmToStep(y_stepper_motor, -1);
 	//moveStepper(y_stepper_motor);
 }
