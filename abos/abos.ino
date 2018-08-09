@@ -31,5 +31,10 @@ void loop()
 	Menu.menu();
 	//Stepper.tryThsi();
 	//delay(5000);
+	int menu = Menu.myOutput();
+	if (menu != -1) {
+		Serial.println(menu);
+		delay(5000);
+	}	
 	Serial.println("LOOP");
 }

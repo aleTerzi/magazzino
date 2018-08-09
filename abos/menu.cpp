@@ -26,7 +26,7 @@ void MenuClass::menu()
 		LCD.printScreenCut(2, i, 2, selection_dictionary[menu_print]);
 		menu_print++;
 		i++;
-		Serial.println(menu_print);
+		//Serial.println(menu_print);
 	}
 	menu_arrow_offset = LCD.LCD_HEIGHT - i;
 	if (button_input == LCD.RIGHT_BUTTON)
@@ -35,7 +35,7 @@ void MenuClass::menu()
 		menuGoToParent();
 	else if (button_input == LCD.CENTER_BUTTON)
 		menuGoToHome();
-	Serial.println(menu_position);
+	//Serial.println(menu_position);
 	if(button_input != LCD.NULL_BUTTON)
 		LCD.setReset();
 }
@@ -155,6 +155,9 @@ void MenuClass::menuWelcomeText()
 
 void MenuClass::menuGoToSon()
 {
+	outputSelection();
+	if(output_selection != -1)
+		return;
 	if(selection_dictionary.find((menu_position + menu_arrow_start) * 10) == selection_dictionary.end())
 		return;
 	menu_position = (menu_position  + menu_arrow_start) * 10;
@@ -185,6 +188,29 @@ void MenuClass::menuGoToHome()
 	menu_arrow_start = 0;
 }
 
+void MenuClass::outputSelection()
+{
+	const int USE_ME = menu_position + menu_arrow_start;
+	const int SIZE_OUTPUT_WITH_ACTION = (sizeof(OUTPUT_WITH_ACTION) / sizeof(*OUTPUT_WITH_ACTION));
+	for (auto i = 0; i < SIZE_OUTPUT_WITH_ACTION; i++)
+	{
+		Serial.println(i);
+		if (OUTPUT_WITH_ACTION[i] == USE_ME)
+		{
+			output_selection = USE_ME;
+			menuGoToHome();
+			return;
+		}
+	}
+	output_selection = -1;
+}
+
+int MenuClass::myOutput()
+{
+	const int OUT = output_selection;
+	output_selection = -1;
+	return OUT;
+}
 
 
 MenuClass Menu;

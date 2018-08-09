@@ -20,11 +20,17 @@ class MenuClass
 	double returnBeginOfDictionary();
 
 	//Menu configuration.
+	const int OUTPUT_WITH_ACTION[13] = {
+		10, 11, 20, 
+		30, 310, 311, 
+		312, 320, 321, 
+		322, 330, 331, 332 
+	};
 	int menu_arrow_start = 0;
 	int menu_arrow_offset = 0;
 	bool menu_set = true;
 	int menu_position = 1;
-
+	int output_selection = -1;
 	/* MENU FUNCTIONS */
 
 	//Arrow's initialization.
@@ -34,15 +40,21 @@ class MenuClass
 
 	//Arrow's movement
 	int menuArrowPosition();
-
 	void menuGoToSon();
 	void menuGoToParent();
 	void menuGoToHome();
-	
+
+	//Find if there is a valid output and return it else return -1.
+	void outputSelection();
+
 public:
 	void init();
 
 	void menu();
+
+	int myOutput();
+
+	
 };
 
 extern MenuClass Menu;
