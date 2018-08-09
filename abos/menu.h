@@ -31,6 +31,7 @@ class MenuClass
 	bool menu_set = true;
 	int menu_position = 1;
 	int output_selection = -1;
+	bool menu_search = false;
 	/* MENU FUNCTIONS */
 
 	//Arrow's initialization.
@@ -52,9 +53,14 @@ public:
 
 	void menu();
 
-	int myOutput();
+	int outputMenu();
+	int outputMenuWithText();
+	void clearOutputSelection();
 
-	
+	//Arrow's movement
+	void setMenuToHome();
+	void setMenuToParent();
+	bool statusMenu();
 };
 
 extern MenuClass Menu;

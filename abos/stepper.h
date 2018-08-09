@@ -2,13 +2,15 @@
 
 #ifndef _STEPPER_h
 #define _STEPPER_h
+#include "menu.h"
+#include "LCD.h"
 
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "arduino.h"
 #else
 	#include "WProgram.h"
 #endif
-#include "LCD.h"
+
 class StepperClass
 {
 	const short int ONE_ROTATION_STEPS = 3200;
@@ -106,13 +108,11 @@ class StepperClass
 
 	void moveStepper(stepperMotor& move_this);
 
-	void moveWithButton(stepperMotor move_this, int unit_of_space);
+	void moveWithButton(stepperMotor move_this, float unit_of_space);
 
  public:
 	void init();
-
-	void autoHome();
-
+	bool useStepper();
 	void tryThsi();
 };
 

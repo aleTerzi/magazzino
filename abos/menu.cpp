@@ -17,6 +17,7 @@ void MenuClass::menu()
 		menuArrowPosition();
 		return;
 	}
+	menu_search = false;
 	const auto button_input = menuArrowPosition();
 	auto i = 0;
 	auto menu_print = menu_position;
@@ -30,15 +31,50 @@ void MenuClass::menu()
 	}
 	menu_arrow_offset = LCD.LCD_HEIGHT - i;
 	if (button_input == LCD.RIGHT_BUTTON)
+	{
 		menuGoToSon();
+		outputSelection();
+	}		
 	else if (button_input == LCD.LEFT_BUTTON)
 		menuGoToParent();
 	else if (button_input == LCD.CENTER_BUTTON)
 		menuGoToHome();
-	//Serial.println(menu_position);
+	Serial.println(menu_position);
 	if(button_input != LCD.NULL_BUTTON)
 		LCD.setReset();
 }
+
+int MenuClass::outputMenu()
+{
+	return output_selection;
+}
+
+int MenuClass::outputMenuWithText()
+{
+	LCD.printScreenAndClear(6, 1, "ATTENDI!");
+	return output_selection;
+}
+
+void MenuClass::clearOutputSelection()
+{
+	output_selection = -1;
+}
+
+void MenuClass::setMenuToHome()
+{
+	menuGoToHome();
+}
+
+void MenuClass::setMenuToParent()
+{
+	menuGoToParent();
+}
+
+bool MenuClass::statusMenu()
+{
+	return menu_search;
+}
+
 
 
 /* PRIVATE */
@@ -155,11 +191,11 @@ void MenuClass::menuWelcomeText()
 
 void MenuClass::menuGoToSon()
 {
-	outputSelection();
-	if(output_selection != -1)
-		return;
 	if(selection_dictionary.find((menu_position + menu_arrow_start) * 10) == selection_dictionary.end())
+	{
+		menu_search = true;
 		return;
+	}		
 	menu_position = (menu_position  + menu_arrow_start) * 10;
 	menu_arrow_start = 0;
 }
@@ -180,12 +216,14 @@ void MenuClass::menuGoToParent()
 	}
 	//Serial.print(menu_position);
 	menu_arrow_start = 0;
+	output_selection = -1;
 }
 
 void MenuClass::menuGoToHome()
 {
 	menu_position = 1;
 	menu_arrow_start = 0;
+	output_selection = -1;
 }
 
 void MenuClass::outputSelection()
@@ -198,20 +236,11 @@ void MenuClass::outputSelection()
 		if (OUTPUT_WITH_ACTION[i] == USE_ME)
 		{
 			output_selection = USE_ME;
-			menuGoToHome();
 			return;
 		}
 	}
 	output_selection = -1;
 }
-
-int MenuClass::myOutput()
-{
-	const int OUT = output_selection;
-	output_selection = -1;
-	return OUT;
-}
-
 
 MenuClass Menu;
 

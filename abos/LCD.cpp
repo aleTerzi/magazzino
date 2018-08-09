@@ -46,6 +46,32 @@ void LCDClass::printScreen(int x, int y, const String text)
 	Display20x4.print(text);
 }
 
+void LCDClass::printScreen(int x, int y, const int text)
+{
+	printScreen(x, y, String(text));
+}
+
+void LCDClass::printScreen(int x, int y, const float text)
+{
+	printScreen(x, y, String(text));
+}
+
+void LCDClass::printScreenAndClear(int x, int y, const String text)
+{
+	LCD.setReset();
+	LCD.printScreen(x, y, text);
+}
+
+void LCDClass::printScreenAndClear(int x, int y, const int text)
+{
+	printScreenAndClear(x, y, String(text));
+}
+
+void LCDClass::printScreenAndClear(int x, int y, const float text)
+{
+	printScreenAndClear(x, y, String(text));
+}
+
 int LCDClass::readButtonValue()
 {
 	int result;;

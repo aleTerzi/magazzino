@@ -53,9 +53,13 @@ class LCDClass
 
 	//Print text with a given position, does not delete the previous text.
 	void printScreen(int x, int y, const String text);
+	void printScreen(int x, int y, const int text);
+	void printScreen(int x, int y, const float text);
 
 	//Print text with a given position, but before delete the previous text.
 	void printScreenAndClear(int x, int y, const String text);
+	void printScreenAndClear(int x, int y, const int text);
+	void printScreenAndClear(int x, int y, const float text);	
 
 	/*
 	 * Print text with a given position,
