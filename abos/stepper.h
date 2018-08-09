@@ -8,7 +8,7 @@
 #else
 	#include "WProgram.h"
 #endif
-
+#include "LCD.h"
 class StepperClass
 {
 	const short int ONE_ROTATION_STEPS = 3200;
@@ -91,8 +91,8 @@ class StepperClass
 	 * Stop:	20
 	 * 
 	 */
-	stepperMotor x_stepper_motor = {15,21,14,18,true,0,true,true,1000,DEFAULT_SHIFT};
-	stepperMotor y_stepper_motor = {22,23,14,19,true,0,true,true,DEFAULT_SPEED,4.13 };
+	stepperMotor x_stepper_motor = {15,21,14,18,true,0,true,true,1000,4.13};
+	stepperMotor y_stepper_motor = {22,23,14,19,true,0,true,true,DEFAULT_SPEED,4.13};
 	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT};
 	//stepperMotor e_stepper_motor = { 1,0,14,-1,true,0,true,true,300,4.13 };
 
@@ -106,6 +106,7 @@ class StepperClass
 
 	void moveStepper(stepperMotor& move_this);
 
+	void moveWithButton(stepperMotor move_this, int unit_of_space);
 
  public:
 	void init();

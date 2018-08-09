@@ -76,6 +76,24 @@ void StepperClass::moveStepper(stepperMotor& move_this)
 	move_this.stepper = 0;
 }
 
+void StepperClass::moveWithButton(stepperMotor move_this, int unit_of_space)
+{
+	int button_input = LCD.readButtonValue();
+	while (button_input != LCD.LEFT_BUTTON || button_input != LCD.CENTER_BUTTON)
+	{
+		if(button_input == LCD.TOP_BUTTON)
+		{
+			cmToStep(move_this, unit_of_space);
+			moveStepper(move_this);
+		}else if(button_input == LCD.BOTTOM_BUTTON)
+		{
+			cmToStep(move_this, unit_of_space * -1);
+			moveStepper(move_this);
+		}			
+		button_input = LCD.readButtonValue();
+	}
+}
+
 
 StepperClass Stepper;
 
