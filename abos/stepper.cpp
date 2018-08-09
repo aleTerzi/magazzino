@@ -14,9 +14,12 @@ void StepperClass::init()
 
 void StepperClass::tryThsi()
 {
-	Serial.println(hitStopForResetPosition(x_stepper_motor));
-	Serial.println(hitStopForResetPosition(y_stepper_motor));
-	Serial.println(hitStopForResetPosition(z_stepper_motor));
+	autoHome();
+	cmToStep(x_stepper_motor, 70);
+	moveStepper(x_stepper_motor);
+	cmToStep(x_stepper_motor, 70);
+	moveStepper(x_stepper_motor);
+	moveX(-70);
 }
 
 bool StepperClass::useStepper()
@@ -89,24 +92,24 @@ bool StepperClass::useStepper()
 
 void StepperClass::autoHome()
 {
-	//set here if need x auto home <--
+	//set here if need Y auto home <--
 
-	//Auto home Y stepper.
-	while (!hitStopForResetPosition(y_stepper_motor))
-	{
-		cmToStep(y_stepper_motor, -120);
-		moveStepper(y_stepper_motor);
-	}
-	cmToStep(y_stepper_motor, 2);
-	y_stepper_motor.SPEED *= 10;
-	moveStepper(y_stepper_motor);
-	while (!hitStopForResetPosition(y_stepper_motor))
-	{
-		cmToStep(y_stepper_motor, -120);
-		moveStepper(y_stepper_motor);
-	}
-	y_stepper_motor.SPEED = DEFAULT_SPEED_Y;
 	//Auto home X stepper.
+	while (!hitStopForResetPosition(x_stepper_motor))
+	{
+		cmToStep(x_stepper_motor, -120);
+		moveStepper(x_stepper_motor);
+	}
+	cmToStep(x_stepper_motor, 2);
+	x_stepper_motor.SPEED *= 10;
+	moveStepper(x_stepper_motor);
+	while (!hitStopForResetPosition(x_stepper_motor))
+	{
+		cmToStep(x_stepper_motor, -120);
+		moveStepper(x_stepper_motor);
+	}
+	x_stepper_motor.SPEED = DEFAULT_SPEED_X;
+	//Auto home Z stepper.
 	while (!hitStopForResetPosition(z_stepper_motor))
 	{
 		cmToStep(z_stepper_motor, -120);
@@ -123,12 +126,20 @@ void StepperClass::autoHome()
 	z_stepper_motor.SPEED = DEFAULT_SPEED_Z;
 }
 
+void StepperClass::engineOn()
+{
+	engineBrakeOn();
+}
+
+
 
 
 /*PRIVATE*/
-void StepperClass::cmToStep(stepperMotor& my_stepper, int space)
+void StepperClass::cmToStep(stepperMotor& my_stepper, long int space)
 {
-	my_stepper.stepper = abs(3200 * space / my_stepper.SHIFT);
+	my_stepper.stepper = 3200 * space / my_stepper.SHIFT;
+	if (my_stepper.stepper < 0)
+		my_stepper.stepper = my_stepper.stepper * -1;
 	Serial.println(my_stepper.stepper);	
 	if(my_stepper.DEFAULT_ROTATION)
 	{
@@ -160,7 +171,7 @@ void StepperClass::moveStepper(stepperMotor& move_this)
 	digitalWrite(move_this.DIRECTION_PIN, move_this.direction);
 	if(move_this.DEFAULT_ROTATION)
 	{
-		for (long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || move_this.direction); i++)
+		for (unsigned long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || move_this.direction); i++)
 		{
 			digitalWrite(move_this.STEPPER_PIN, HIGH);
 			delayMicroseconds(70);
@@ -169,7 +180,7 @@ void StepperClass::moveStepper(stepperMotor& move_this)
 		}
 	}else
 	{
-		for (long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || !move_this.direction); i++)
+		for (unsigned long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || !move_this.direction); i++)
 		{
 			digitalWrite(move_this.STEPPER_PIN, HIGH);
 			delayMicroseconds(70);
@@ -225,6 +236,24 @@ void StepperClass::engineBrakeOn()
 {
 	digitalWrite(x_stepper_motor.ENABLE_PIN, LOW);
 	digitalWrite(z_stepper_motor.ENABLE_PIN, LOW);
+}
+
+void StepperClass::moveX(int space)
+{
+	cmToStep(x_stepper_motor, space);
+	moveStepper(x_stepper_motor);
+}
+
+void StepperClass::moveY(int space)
+{
+	cmToStep(y_stepper_motor, space);
+	moveStepper(y_stepper_motor);
+}
+
+void StepperClass::moveZ(int space)
+{
+	cmToStep(z_stepper_motor, space);
+	moveStepper(z_stepper_motor);
 }
 
 

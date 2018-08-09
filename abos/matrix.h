@@ -3,6 +3,7 @@
 #ifndef _MATRIX_h
 #define _MATRIX_h
 #include "menu.h"
+#include "stepper.h"
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "arduino.h"
 #else
@@ -25,7 +26,7 @@ class MatrixClass
 	/* CELL */
 	const int N_BOX_FOR_LINE = 7;
 	const float BOX_WIDTH = 10;
-	const float COLUMNS = 0.55;
+	const float COLUMNS = 0.75;
 	const int N_SPACE_COLUMNS = 11;
 
 	const int N_BOX_FOR_COLUMN = 4;
@@ -37,6 +38,14 @@ class MatrixClass
 	bool **matrix;
 	void setUpVector();
 	void printVector();
+	bool sectorIsFree(int x, int y);
+	void addAtFirst();
+
+	/*FISIC BOX*/
+	float z_coordinate = -1;
+	float x_coordinate = -1;
+	void virtualToFisic(int z, int y);
+	void goToPosition();
 
  public:
 	void init();

@@ -97,7 +97,7 @@ class StepperClass
 	 * 
 	 */
 	stepperMotor x_stepper_motor = { 22,23,14,19,false,0,true,true,DEFAULT_SPEED_Y,DEFAULT_SHIFT_XY };
-	stepperMotor y_stepper_motor = { 15,21,14,18,true,0,true,true,DEFAULT_SPEED_X,DEFAULT_SHIFT_XY };
+	stepperMotor y_stepper_motor = { 15,21,14,18,false,0,true,true,DEFAULT_SPEED_X,DEFAULT_SHIFT_XY };
 	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED_Z,DEFAULT_SHIFT_Z};
 	//stepperMotor e_stepper_motor = { 1,0,14,-1,true,0,true,true,300,4.13 };
 
@@ -105,7 +105,7 @@ class StepperClass
 
 	//void defaultStepperSet(stepperMotor& my_stepper, int line);
 
-	void cmToStep(stepperMotor& my_stepper, int space);
+	void cmToStep(stepperMotor& my_stepper, long int space);
 
 	bool hitStopForResetPosition(stepperMotor move_this);
 
@@ -121,6 +121,10 @@ class StepperClass
 	bool useStepper();
 	void autoHome();
 	void tryThsi();
+	void moveX(int space);
+	void moveY(int space);
+	void moveZ(int space);
+	void engineOn();
 };
 
 extern StepperClass Stepper;
