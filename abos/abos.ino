@@ -1,6 +1,5 @@
 /* LIBRERIE */
 
-
 #include <utility.h>
 #include <unwind-cxx.h>
 #include <system_configuration.h>
@@ -10,6 +9,7 @@
 #include "pins.h"
 #include "menu.h"
 #include "pins.h"
+#include "matrix.h"
 
 /* SETUP */
 void setup()
@@ -21,6 +21,7 @@ void setup()
 	LCD.bootScreen();
 	Stepper.init();
 	Menu.init();
+	Matrix.init();
 	Stepper.init();	
 	delay(2000);
 }

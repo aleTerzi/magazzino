@@ -96,8 +96,8 @@ class StepperClass
 	 * Stop:	20
 	 * 
 	 */
-	stepperMotor x_stepper_motor = {15,21,14,18,true,0,true,true,DEFAULT_SPEED_X,DEFAULT_SHIFT_XY};
-	stepperMotor y_stepper_motor = {22,23,14,19,false,0,true,true,DEFAULT_SPEED_Y,DEFAULT_SHIFT_XY};
+	stepperMotor x_stepper_motor = { 22,23,14,19,false,0,true,true,DEFAULT_SPEED_Y,DEFAULT_SHIFT_XY };
+	stepperMotor y_stepper_motor = { 15,21,14,18,true,0,true,true,DEFAULT_SPEED_X,DEFAULT_SHIFT_XY };
 	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED_Z,DEFAULT_SHIFT_Z};
 	//stepperMotor e_stepper_motor = { 1,0,14,-1,true,0,true,true,300,4.13 };
 
