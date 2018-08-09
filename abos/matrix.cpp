@@ -3,12 +3,36 @@
 // 
 
 #include "matrix.h"
-
 void MatrixClass::init()
 {
 	setUpVector();
 	printVector();
 }
+
+bool MatrixClass::useMatrix()
+{
+	if(Menu.statusMenu())
+	{
+		const int go_here = Menu.outputMenu();
+		if (go_here == 10)
+		{
+			Serial.println("1");
+			return true;
+		}
+		if (go_here == 11)
+		{
+			Serial.println("2");
+			return true;
+		}
+		if (go_here == 20)
+		{
+			Serial.println("3");
+			return true;
+		}
+	}
+	return false;
+}
+
 
 /* PRIVATE */
 void MatrixClass::setUpVector()

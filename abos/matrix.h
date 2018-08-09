@@ -2,7 +2,7 @@
 
 #ifndef _MATRIX_h
 #define _MATRIX_h
-#include <vector>
+#include "menu.h"
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "arduino.h"
 #else
@@ -40,6 +40,7 @@ class MatrixClass
 
  public:
 	void init();
+	bool useMatrix();
 };
 
 extern MatrixClass Matrix;

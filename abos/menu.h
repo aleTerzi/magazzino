@@ -25,7 +25,7 @@ class MenuClass
 		30, 310, 311, 
 		312, 320, 321, 
 		322, 330, 331,
-		332, 4
+		332, 4,
 	};
 	int menu_arrow_start = 0;
 	int menu_arrow_offset = 0;

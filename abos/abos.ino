@@ -34,5 +34,7 @@ void loop()
 	//delay(5000);
 	if (Stepper.useStepper())
 		Menu.clearOutputSelection();
+	else if (Matrix.useMatrix())
+		Menu.clearOutputSelection();
 	Serial.println("LOOP");
 }
