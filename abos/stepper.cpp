@@ -14,25 +14,9 @@ void StepperClass::init()
 
 void StepperClass::tryThsi()
 {
-	cmToStep(y_stepper_motor, -1);
-	moveStepper(y_stepper_motor);
-	delay(500);
-	cmToStep(y_stepper_motor, 1);
-	moveStepper(y_stepper_motor);
-	delay(500);
-	cmToStep(z_stepper_motor, 1);
-	moveStepper(z_stepper_motor);
-	delay(500);
-	cmToStep(z_stepper_motor, -1);
-	moveStepper(z_stepper_motor);
-	delay(2000);	
-	cmToStep(x_stepper_motor, 1);
-	moveStepper(x_stepper_motor);
-	delay(500);
-	cmToStep(x_stepper_motor, -1);
-	moveStepper(x_stepper_motor);	
-	//cmToStep(y_stepper_motor, -1);
-	//moveStepper(y_stepper_motor);
+	Serial.println(hitStopForResetPosition(x_stepper_motor));
+	Serial.println(hitStopForResetPosition(y_stepper_motor));
+	Serial.println(hitStopForResetPosition(z_stepper_motor));
 }
 
 bool StepperClass::useStepper()
@@ -118,21 +102,38 @@ void StepperClass::cmToStep(stepperMotor& my_stepper, int space)
 }
 
 
-void StepperClass::hitStopForResetPosition(stepperMotor move_this)
+bool StepperClass::hitStopForResetPosition(stepperMotor move_this)
 {
+	if (digitalRead(move_this.STOP_PIN))
+		return false;
+	return true;
 	
 }
 
 void StepperClass::moveStepper(stepperMotor& move_this)
 {
 	digitalWrite(move_this.DIRECTION_PIN, move_this.direction);
-	for(long int i = 0; i < move_this.stepper; i++)
+	if(move_this.DEFAULT_ROTATION)
 	{
-		digitalWrite(move_this.STEPPER_PIN, HIGH);
-		delayMicroseconds(70);
-		digitalWrite(move_this.STEPPER_PIN, LOW);
-		delayMicroseconds(70);
+		for (long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || move_this.direction); i++)
+		{
+			digitalWrite(move_this.STEPPER_PIN, HIGH);
+			delayMicroseconds(70);
+			digitalWrite(move_this.STEPPER_PIN, LOW);
+			delayMicroseconds(70);
+		}
+	}else
+	{
+		for (long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || !move_this.direction); i++)
+		{
+			digitalWrite(move_this.STEPPER_PIN, HIGH);
+			delayMicroseconds(70);
+			digitalWrite(move_this.STEPPER_PIN, LOW);
+			delayMicroseconds(70);
+		}
 	}
+
+	
 	move_this.stepper = 0;
 }
 

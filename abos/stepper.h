@@ -94,7 +94,7 @@ class StepperClass
 	 * 
 	 */
 	stepperMotor x_stepper_motor = {15,21,14,18,true,0,true,true,1000,4.13};
-	stepperMotor y_stepper_motor = {22,23,14,19,true,0,true,true,DEFAULT_SPEED,4.13};
+	stepperMotor y_stepper_motor = {22,23,14,19,false,0,true,true,DEFAULT_SPEED,4.13};
 	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT};
 	//stepperMotor e_stepper_motor = { 1,0,14,-1,true,0,true,true,300,4.13 };
 
@@ -104,7 +104,7 @@ class StepperClass
 
 	void cmToStep(stepperMotor& my_stepper, int space);
 
-	void hitStopForResetPosition(stepperMotor move_this);
+	bool hitStopForResetPosition(stepperMotor move_this);
 
 	void moveStepper(stepperMotor& move_this);
 
