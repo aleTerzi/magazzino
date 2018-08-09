@@ -14,8 +14,11 @@
 class StepperClass
 {
 	const short int ONE_ROTATION_STEPS = 3200;
-	const double DEFAULT_SHIFT = 0.12;
-	const short int DEFAULT_SPEED =70;	
+	const double DEFAULT_SHIFT_Z = 0.12;
+	const short int DEFAULT_SPEED_Z =70;
+	const double DEFAULT_SHIFT_XY = 4.13;
+	const short int DEFAULT_SPEED_X = 2000;
+	const short int DEFAULT_SPEED_Y = 150;
 
 	struct stepperMotor
 	{
@@ -93,9 +96,9 @@ class StepperClass
 	 * Stop:	20
 	 * 
 	 */
-	stepperMotor x_stepper_motor = {15,21,14,18,true,0,true,true,1000,4.13};
-	stepperMotor y_stepper_motor = {22,23,14,19,false,0,true,true,DEFAULT_SPEED,4.13};
-	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED,DEFAULT_SHIFT};
+	stepperMotor x_stepper_motor = {15,21,14,18,true,0,true,true,DEFAULT_SPEED_X,DEFAULT_SHIFT_XY};
+	stepperMotor y_stepper_motor = {22,23,14,19,false,0,true,true,DEFAULT_SPEED_Y,DEFAULT_SHIFT_XY};
+	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED_Z,DEFAULT_SHIFT_Z};
 	//stepperMotor e_stepper_motor = { 1,0,14,-1,true,0,true,true,300,4.13 };
 
 	//Set default statistics for stepper.
@@ -113,6 +116,7 @@ class StepperClass
  public:
 	void init();
 	bool useStepper();
+	void autoHome();
 	void tryThsi();
 };
 

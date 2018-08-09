@@ -27,7 +27,8 @@ bool StepperClass::useStepper()
 		{
 			Serial.println("Sono qui");
 			Menu.outputMenuWithText();
-			delay(5000);
+			autoHome();
+			//delay(5000);
 			return true;
 		}
 		if (Menu.outputMenu() == 310)
@@ -78,6 +79,43 @@ bool StepperClass::useStepper()
 	}	
 	return false;
 }
+
+void StepperClass::autoHome()
+{
+	//set here if need x auto home <--
+
+	//Auto home Y stepper.
+	while (!hitStopForResetPosition(y_stepper_motor))
+	{
+		cmToStep(y_stepper_motor, -120);
+		moveStepper(y_stepper_motor);
+	}
+	cmToStep(y_stepper_motor, 2);
+	y_stepper_motor.SPEED *= 10;
+	moveStepper(y_stepper_motor);
+	while (!hitStopForResetPosition(y_stepper_motor))
+	{
+		cmToStep(y_stepper_motor, -120);
+		moveStepper(y_stepper_motor);
+	}
+	y_stepper_motor.SPEED = DEFAULT_SPEED_Y;
+	//Auto home X stepper.
+	while (!hitStopForResetPosition(z_stepper_motor))
+	{
+		cmToStep(z_stepper_motor, -120);
+		moveStepper(z_stepper_motor);
+	}
+	cmToStep(z_stepper_motor, 1);
+	z_stepper_motor.SPEED *= 4;
+	moveStepper(z_stepper_motor);
+	while (!hitStopForResetPosition(z_stepper_motor))
+	{
+		cmToStep(z_stepper_motor, -120);
+		moveStepper(z_stepper_motor);
+	}
+	z_stepper_motor.SPEED = DEFAULT_SPEED_Z;
+}
+
 
 
 /*PRIVATE*/
@@ -131,9 +169,7 @@ void StepperClass::moveStepper(stepperMotor& move_this)
 			digitalWrite(move_this.STEPPER_PIN, LOW);
 			delayMicroseconds(70);
 		}
-	}
-
-	
+	}	
 	move_this.stepper = 0;
 }
 
