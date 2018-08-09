@@ -13,6 +13,7 @@ struct engine {
 const engine Xmotor{15, 21, 14, 18};
 const engine Ymotor{22, 23, Xmotor.enable, 19};
 const engine Zmotor{3, 2, 26, 20};
+const engine Emotor{};
 
 int passi;
 void setup() {
@@ -36,13 +37,13 @@ void loop() {
     //passi = numeroStep();
     //Serial.println(passi);
     //engine.moveZStep(passi);
-    moveEngine(Zmotor, 1, Xmotor);
+    moveEngine(Zmotor, -1, Ymotor);
     //moveEngine(Xmotor);
     //passi *= -1;
     //moveEngine(Ymotor);
   /* GO HOME */
   //Serial.print("entrato ");
-    goHome(Zmotor, Xmotor);
+    //goHome(Zmotor, Ymotor);
   //goHome(Ymotor);
   //goHome(Zmotor);
   //while (readEndStop(Ymotor)) {}
@@ -66,7 +67,7 @@ int numeroStep() {
     Serial.println(name);
     return name.toInt();
   } else {
-    delay(100);
+    //delay(100);
   }
   return 0;
 }
@@ -82,13 +83,16 @@ void moveEngine(engine MoveThis, int moveStep, engine MoveThisX) {
   for (int x = 0; x < moveStep; x++) {
     digitalWrite(MoveThis.stepPin, HIGH);
     //digitalWrite(MoveThisX.stepPin, HIGH);
-    delayMicroseconds(70);
+    delayMicroseconds(200);
     digitalWrite(MoveThis.stepPin, LOW);
     //digitalWrite(MoveThisX.stepPin, LOW);
-    delayMicroseconds(70);
+    delayMicroseconds(200);
+    
   }
   //digitalWrite(MoveThis.enable, HIGH);
 }
+
+
 
 bool readEndStop(engine MoveThis) {
   //Serial.print(digitalRead(MoveThis.endStop));
@@ -98,13 +102,13 @@ bool readEndStop(engine MoveThis) {
 void goHome(engine MoveThis, engine MoveThisX) {
 
   while (readEndStop(MoveThis)) {
-    //Serial.println("qui");
-    Serial.println(MoveThis.endStop);
     moveEngine(MoveThis, -1, MoveThisX);
   }
   if(!readEndStop(MoveThis)){
-    moveEngine(MoveThis, -3200, MoveThisX);
-    while(true){};
+     moveEngine(MoveThis, -3200, MoveThisX);
+    while(true){
+      moveEngine(MoveThis, -1, MoveThisX);
+      };
   };
 }
 
