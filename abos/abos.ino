@@ -28,8 +28,8 @@ void setup()
 /* LOOP */
 void loop()
 {
-	//Menu.menu();
-	Stepper.tryThsi();
+	Menu.menu();
+	//Stepper.tryThsi();
 	delay(5000);
 	Serial.println("LOOP");
 }

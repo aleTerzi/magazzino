@@ -20,19 +20,17 @@ void StepperClass::tryThsi()
 	cmToStep(y_stepper_motor, 1);
 	moveStepper(y_stepper_motor);
 	delay(500);
-	//cmToStep(z_stepper_motor, 1);
-	//moveStepper(z_stepper_motor);
-	//delay(500);
-	//cmToStep(z_stepper_motor, -1);
-	//moveStepper(z_stepper_motor);
-	delay(2000);
-	
+	cmToStep(z_stepper_motor, 1);
+	moveStepper(z_stepper_motor);
+	delay(500);
+	cmToStep(z_stepper_motor, -1);
+	moveStepper(z_stepper_motor);
+	delay(2000);	
 	cmToStep(x_stepper_motor, 1);
 	moveStepper(x_stepper_motor);
 	delay(500);
 	cmToStep(x_stepper_motor, -1);
-	moveStepper(x_stepper_motor);
-	
+	moveStepper(x_stepper_motor);	
 	//cmToStep(y_stepper_motor, -1);
 	//moveStepper(y_stepper_motor);
 }
