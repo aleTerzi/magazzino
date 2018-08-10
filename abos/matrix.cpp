@@ -23,12 +23,12 @@ bool MatrixClass::useMatrix()
 		}
 		if (go_here == 11)
 		{
-			Serial.println("2");
+			inputWithSelection();
 			return true;
 		}
 		if (go_here == 20)
 		{
-			Serial.println("3");
+			outputWithSelection();
 			return true;
 		}
 	}
@@ -66,6 +66,14 @@ bool MatrixClass::sectorIsFree(int x, int y)
 		return true;
 	return false;
 }
+
+bool MatrixClass::sectorIsTake(int x, int y)
+{
+	if (matrix[x][y] == true)
+		return true;
+	return false;
+}
+
 
 void MatrixClass::addAtFirst()
 {
@@ -120,8 +128,96 @@ void MatrixClass::goToPosition()
 	printVector();
 }
 
+void MatrixClass::manualInterface(String my_text)
+{
+	float button_input = LCD.readButtonValue();
+	z_coordinate = 0;
+	x_coordinate = 0;
+	LCD.setReset();
+	LCD.printScreenAndClear(1, 2, my_text);
+	LCD.printScreen(my_text.length() + 1, 0, "Ri");
+	LCD.printScreen(my_text.length() + 4, 0, "Co");
+	LCD.printScreen(my_text.length() + 1, 2, int(x_coordinate));
+	LCD.printScreen(my_text.length() + 4, 2, int(z_coordinate));
+	while (button_input != LCD.LEFT_BUTTON && button_input != LCD.CENTER_BUTTON)
+	{
+		if (button_input == LCD.TOP_BUTTON)
+		{
+			nextSlotFreeWithOffset(true);
+			LCD.setReset();
+			LCD.printScreenAndClear(1, 2, my_text);
+			LCD.printScreen(my_text.length() + 1, 0, "Ri");
+			LCD.printScreen(my_text.length() + 4, 0, "Co");
+			LCD.printScreen(my_text.length() + 1, 2, int(x_coordinate));
+			LCD.printScreen(my_text.length() + 4, 2, int(z_coordinate));
+		}
+		else if (button_input == LCD.BOTTOM_BUTTON)
+		{
+			nextSlotFreeWithOffset(false);
+			LCD.setReset();
+			LCD.printScreenAndClear(1, 2, my_text);
+			LCD.printScreen(my_text.length() + 1, 0, "Ri");
+			LCD.printScreen(my_text.length() + 4, 0, "Co");
+			LCD.printScreen(my_text.length() + 1, 2, int(x_coordinate));
+			LCD.printScreen(my_text.length() + 4, 2, int(z_coordinate));
+		}
+		else if (button_input == LCD.RIGHT_BUTTON && x_coordinate >= 0 && z_coordinate >= 0)
+		{
+			matrix[int(x_coordinate)][int(z_coordinate)] = free;
+			virtualToFisic(z_coordinate, x_coordinate);
+			goToPosition();
+			LCD.setReset();
+			Menu.setMenuToHome();
+			return;
+		}		
+		button_input = LCD.readButtonValue();
+	}
+	LCD.setReset();
+	if (button_input == LCD.CENTER_BUTTON)
+		Menu.setMenuToHome();
+	if (button_input == LCD.LEFT_BUTTON)
+		Menu.setMenuToParent();
+}
 
+void MatrixClass::inputWithSelection()
+{
+	manualInterface("Inserisci: ");
+}
 
+void MatrixClass::outputWithSelection()
+{
+	manualInterface("Rimuovi: ");
+}
+
+void MatrixClass::nextSlotFreeWithOffset(bool direction)
+{
+	if(direction)
+	{
+		if (x_coordinate < N_BOX_FOR_COLUMN - 1)
+			x_coordinate += 1;
+		else if (z_coordinate < N_BOX_FOR_LINE - 1)
+		{
+			x_coordinate = 0;
+			z_coordinate += 1;
+		}
+		else
+		{
+			x_coordinate = 0;
+			z_coordinate = 0;
+		}
+	}
+	else
+	{
+		if (x_coordinate > 0)
+			x_coordinate -= 1;
+		else if (z_coordinate > 0)
+		{
+			x_coordinate = N_BOX_FOR_COLUMN - 1;
+			z_coordinate -= 1;
+		}
+	}
+	
+}
 
 MatrixClass Matrix;
 

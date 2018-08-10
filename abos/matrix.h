@@ -39,13 +39,18 @@ class MatrixClass
 	void setUpVector();
 	void printVector();
 	bool sectorIsFree(int x, int y);
+	bool sectorIsTake(int x, int y);
 	void addAtFirst();
+	void nextSlotFreeWithOffset(bool direction);
 
 	/*FISIC BOX*/
 	float z_coordinate = -1;
 	float x_coordinate = -1;
 	void virtualToFisic(int z, int y);
 	void goToPosition();
+	void manualInterface(String my_text);
+	void inputWithSelection();
+	void outputWithSelection();
 
  public:
 	void init();
