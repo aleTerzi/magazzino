@@ -4,7 +4,6 @@
 
 #include "pins.h"
 
-
 /* PUBLIC */
 void PinsClass::init()
 {
