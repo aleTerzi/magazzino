@@ -2,6 +2,8 @@
 
 #ifndef _STEPPER_h
 #define _STEPPER_h
+
+/* LIBRARIES */
 #include "menu.h"
 #include "LCD.h"
 
@@ -96,34 +98,54 @@ class StepperClass
 	 * Stop:	20
 	 * 
 	 */
+	/* CREATION OF THE STEPPERS */
 	stepperMotor x_stepper_motor = { 22,23,14,19,false,0,true,true,DEFAULT_SPEED_Y,DEFAULT_SHIFT_XY };
 	stepperMotor y_stepper_motor = { 15,21,14,18,false,0,true,true,DEFAULT_SPEED_X,DEFAULT_SHIFT_XY };
 	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED_Z,DEFAULT_SHIFT_Z};
 	//stepperMotor e_stepper_motor = { 1,0,14,-1,true,0,true,true,300,4.13 };
 
-	//Set default statistics for stepper.
-
 	//void defaultStepperSet(stepperMotor& my_stepper, int line);
 
+	//Converts a distance in centimeters into engine revolutions.
 	void cmToStep(stepperMotor& my_stepper, long int space);
 
+	/*
+	 * Returns if the engine hit the end stop.
+	 * TRUE --> hit.
+	 * FALSE --> not hit.
+	 */
 	bool hitStopForResetPosition(stepperMotor move_this);
 
+	//Physically moves the stepper.
 	void moveStepper(stepperMotor& move_this);
 
+	//Takes input from the L.C.D. of how much a certain stepper must move.
 	void moveWithButton(stepperMotor move_this, float unit_of_space);
 
+	//Disable all the steppers.
 	void engineBrakeOff();
+
+	//Enable all the steppers.
 	void engineBrakeOn();
 
  public:
+
+	//Init class.
 	void init();
-	bool useStepper();
+
+	//bool useStepper();
+
+	//Reset all steppers position to home.
 	void autoHome();
-	void tryThsi();
+
+	//void tryThsi();
+
+	//Take in input a space and move the stepper of that position.
 	void moveX(int space);
 	void moveY(int space);
 	void moveZ(int space);
+
+	//Enable all the steppers (public).
 	void engineOn();
 };
 

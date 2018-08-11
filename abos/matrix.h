@@ -3,7 +3,7 @@
 #ifndef _MATRIX_h
 #define _MATRIX_h
 
-/*  */
+/* LIBRARIES */
 #include "menu.h"
 #include "stepper.h"
 
@@ -33,7 +33,7 @@ class MatrixClass
 	const float COLUMNS = 0.75;
 	const int N_SPACE_COLUMNS = 11;
 
-  /* CELL HEIGHT DATA */
+	/* CELL HEIGHT DATA */
 	const int N_BOX_FOR_COLUMN = 4;
 	const float BOX_HEIGHT = 15;
 	const float LINES = 4;

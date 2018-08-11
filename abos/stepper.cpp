@@ -35,7 +35,7 @@ bool StepperClass::useStepper()
 		}
 		if (go_here == 30)
 		{
-			Serial.println("Sono qui");
+			//Serial.println("Sono qui");
 			Menu.outputMenuWithText();
 			autoHome();
 			//delay(5000);

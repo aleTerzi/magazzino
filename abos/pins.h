@@ -82,6 +82,8 @@ class PinsClass
 	 void pinInput();
 
  public:
+
+	 //Init the pins
 	 void init();
 };
 
