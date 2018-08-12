@@ -5,7 +5,7 @@
 #include "LCD.h"
 /* PUBLIC */
 void LCDClass::init()
-{	
+{
 	Display20x4.begin(LCD_WIDTH, LCD_HEIGHT);
 	Display20x4.clear();
 }
@@ -74,45 +74,52 @@ void LCDClass::printScreenAndClear(int x, int y, const float text)
 
 int LCDClass::readButtonValue()
 {
-	int result;;
+	int result;
 	int myValue = analogRead(PIN_BUTTON);
 	int min_value = myValue - myValue * DEFAULT_ERROR_RANGE / 100; //the min value is equal to the 90% of the standard one
-	if(myValue < NULL_BUTTON)
+	if (myValue < NULL_BUTTON)
 	{
-		if ( min_value <= LEFT_BUTTON)
+		if (min_value <= LEFT_BUTTON)
 		{
 			result = LEFT_BUTTON;
-		}else if (min_value <= BOTTOM_BUTTON)
+		}
+		else if (min_value <= BOTTOM_BUTTON)
 		{
 			result = BOTTOM_BUTTON;
-		}else if (min_value <= CENTER_BUTTON)
+		}
+		else if (min_value <= CENTER_BUTTON)
 		{
 			result = CENTER_BUTTON;
-		}else if (min_value <= RIGHT_BUTTON)
+		}
+		else if (min_value <= RIGHT_BUTTON)
 		{
 			result = RIGHT_BUTTON;
-		}else if(min_value <= TOP_BUTTON)
+		}
+		else if (min_value <= TOP_BUTTON)
 		{
 			result = TOP_BUTTON;
-		}else
+		}
+		else
 		{
 			result = readButtonValue();
 		}
 
-		while (analogRead(PIN_BUTTON) < NULL_BUTTON) {}
+		while (analogRead(PIN_BUTTON) < NULL_BUTTON)
+		{
+		}
 		return result;
 	}
 	return NULL_BUTTON;
 }
 
 /* PRIVATE */
-void LCDClass::findClosest(int arr[], int n, int target, int &result)
+void LCDClass::findClosest(int arr[], int n, int target, int& result)
 {
 	int difference = abs(target - arr[0]);
 	result = arr[0];
-	for(auto i = 0; i < n; i++)
+	for (auto i = 0; i < n; i++)
 	{
-		if(abs(arr[n] - target) < difference)
+		if (abs(arr[n] - target) < difference)
 		{
 			difference = abs(arr[n] - target);
 			result = arr[n];
@@ -129,13 +136,14 @@ void LCDClass::printScreenCut(int x, int y, int offset, String text)
 void LCDClass::autoScroolLeft(int x, int y, int offset, String text)
 {
 	int combo = text.length() - LCD.LCD_WIDTH + offset + 1;
-	for(auto i = 0; i <= combo && combo > 0; i++)
+	for (auto i = 0; i <= combo && combo > 0; i++)
 	{
 		delay(300);
 		LCD.printScreen(x, y, text.substring(i, LCD_WIDTH + i - offset));
 	}
 	printScreenCut(x, y, offset, text);
 }
+
 /*
 void LCDClass::setCursorVisible()
 {
@@ -149,4 +157,3 @@ void LCDClass::setCursorInvisible()
 */
 
 LCDClass LCD;
-

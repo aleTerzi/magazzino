@@ -8,7 +8,7 @@
 #include "LCD.h"
 
 #if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
+#include "arduino.h"
 #else
 	#include "WProgram.h"
 #endif
@@ -17,7 +17,7 @@ class StepperClass
 {
 	const short int ONE_ROTATION_STEPS = 3200;
 	const double DEFAULT_SHIFT_Z = 0.12;
-	const short int DEFAULT_SPEED_Z =70;
+	const short int DEFAULT_SPEED_Z = 70;
 	const double DEFAULT_SHIFT_XY = 4.13;
 	const short int DEFAULT_SPEED_X = 2000;
 	const short int DEFAULT_SPEED_Y = 150;
@@ -99,8 +99,8 @@ class StepperClass
 	 * 
 	 */
 	/* CREATION OF THE STEPPERS */
-	stepperMotor x_stepper_motor = { 22,23,14,19,false,0,true,true,DEFAULT_SPEED_Y,DEFAULT_SHIFT_XY };
-	stepperMotor y_stepper_motor = { 15,21,14,18,false,0,true,true,DEFAULT_SPEED_X,DEFAULT_SHIFT_XY };
+	stepperMotor x_stepper_motor = {22,23,14,19,false,0,true,true,DEFAULT_SPEED_Y,DEFAULT_SHIFT_XY};
+	stepperMotor y_stepper_motor = {15,21,14,18,false,0,true,true,DEFAULT_SPEED_X,DEFAULT_SHIFT_XY};
 	stepperMotor z_stepper_motor = {3,2,26,20,true,0,true,true,DEFAULT_SPEED_Z,DEFAULT_SHIFT_Z};
 	//stepperMotor e_stepper_motor = { 1,0,14,-1,true,0,true,true,300,4.13 };
 
@@ -128,17 +128,18 @@ class StepperClass
 	//Enable all the steppers.
 	void engineBrakeOn();
 
- public:
+public:
 
 	//Init class.
 	void init();
 
-	//bool useStepper();
+	//Interaction with class.
+	bool useStepper();
 
 	//Reset all steppers position to home.
 	void autoHome();
 
-	//void tryThsi();
+	void tryThsi();
 
 	//Take in input a space and move the stepper of that position.
 	void moveX(int space);
@@ -152,4 +153,3 @@ class StepperClass
 extern StepperClass Stepper;
 
 #endif
-

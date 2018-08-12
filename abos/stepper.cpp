@@ -24,11 +24,11 @@ void StepperClass::tryThsi()
 
 bool StepperClass::useStepper()
 {
-	if(Menu.statusMenu())
+	if (Menu.statusMenu())
 	{
 		engineBrakeOn();
 		const int go_here = Menu.outputMenu();
-		if(go_here == 4)
+		if (go_here == 4)
 		{
 			engineBrakeOff();
 			return true;
@@ -132,16 +132,14 @@ void StepperClass::engineOn()
 }
 
 
-
-
 /*PRIVATE*/
 void StepperClass::cmToStep(stepperMotor& my_stepper, long int space)
 {
 	my_stepper.stepper = 3200 * space / my_stepper.SHIFT;
 	if (my_stepper.stepper < 0)
 		my_stepper.stepper = my_stepper.stepper * -1;
-	Serial.println(my_stepper.stepper);	
-	if(my_stepper.DEFAULT_ROTATION)
+	Serial.println(my_stepper.stepper);
+	if (my_stepper.DEFAULT_ROTATION)
 	{
 		if (space > 0)
 			my_stepper.direction = true;
@@ -163,31 +161,33 @@ bool StepperClass::hitStopForResetPosition(stepperMotor move_this)
 	if (digitalRead(move_this.STOP_PIN))
 		return false;
 	return true;
-	
 }
 
 void StepperClass::moveStepper(stepperMotor& move_this)
 {
 	digitalWrite(move_this.DIRECTION_PIN, move_this.direction);
-	if(move_this.DEFAULT_ROTATION)
+	if (move_this.DEFAULT_ROTATION)
 	{
-		for (unsigned long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || move_this.direction); i++)
+		for (unsigned long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || move_this.direction); i
+		     ++)
 		{
 			digitalWrite(move_this.STEPPER_PIN, HIGH);
 			delayMicroseconds(70);
 			digitalWrite(move_this.STEPPER_PIN, LOW);
 			delayMicroseconds(70);
 		}
-	}else
+	}
+	else
 	{
-		for (unsigned long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || !move_this.direction); i++)
+		for (unsigned long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || !move_this.direction);
+		     i++)
 		{
 			digitalWrite(move_this.STEPPER_PIN, HIGH);
 			delayMicroseconds(70);
 			digitalWrite(move_this.STEPPER_PIN, LOW);
 			delayMicroseconds(70);
 		}
-	}	
+	}
 	move_this.stepper = 0;
 }
 
@@ -200,7 +200,7 @@ void StepperClass::moveWithButton(stepperMotor move_this, float unit_of_space)
 	LCD.printScreen(12, 1, position);
 	while (button_input != LCD.LEFT_BUTTON && button_input != LCD.CENTER_BUTTON)
 	{
-		if(button_input == LCD.TOP_BUTTON)
+		if (button_input == LCD.TOP_BUTTON)
 		{
 			cmToStep(move_this, unit_of_space);
 			moveStepper(move_this);
@@ -208,7 +208,8 @@ void StepperClass::moveWithButton(stepperMotor move_this, float unit_of_space)
 			LCD.printScreenAndClear(1, 1, "Posizione: ");
 			LCD.printScreen(12, 1, position);
 			//LCD.printScreen(1, 11, position);
-		}else if(button_input == LCD.BOTTOM_BUTTON)
+		}
+		else if (button_input == LCD.BOTTOM_BUTTON)
 		{
 			cmToStep(move_this, -(unit_of_space));
 			moveStepper(move_this);
@@ -216,7 +217,7 @@ void StepperClass::moveWithButton(stepperMotor move_this, float unit_of_space)
 			LCD.printScreenAndClear(1, 1, "Posizione: ");
 			LCD.printScreen(12, 1, position);
 			//LCD.printScreen(1, 11, position);
-		}			
+		}
 		button_input = LCD.readButtonValue();
 	}
 	LCD.setReset();
@@ -258,4 +259,3 @@ void StepperClass::moveZ(int space)
 
 
 StepperClass Stepper;
-

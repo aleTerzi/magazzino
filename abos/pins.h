@@ -4,14 +4,14 @@
 #define _PINS_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
+#include "arduino.h"
 #else
 	#include "WProgram.h"
 #endif
 
 class PinsClass
 {
- protected:
+protected:
 	/*
 	 * //Engine:
 	 * - X: 
@@ -52,10 +52,10 @@ class PinsClass
 	 * 
 	 *
 	 */
-	 const unsigned short int pin_out[11] = {15, 21, 22, 23, 14, 3, 2, 26, 18, 19, 20};
+	const unsigned short int pin_out[11] = {15, 21, 22, 23, 14, 3, 2, 26, 18, 19, 20};
 
 	//Declaration pin output:
-	 void pinOutput();
+	void pinOutput();
 
 	/*
 	 * //L.C.D. buttons:
@@ -76,18 +76,17 @@ class PinsClass
 	 * Stop:	20
 	 * 
 	 */
-	 const unsigned short int pin_in[5] = { 17, 30, 18, 19, 20 };
+	const unsigned short int pin_in[5] = {17, 30, 18, 19, 20};
 
 	//Declaration pin input:
-	 void pinInput();
+	void pinInput();
 
- public:
+public:
 
-	 //Init the pins
-	 void init();
+	//Init the pins
+	void init();
 };
 
 extern PinsClass Pins;
 
 #endif
-

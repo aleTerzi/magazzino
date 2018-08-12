@@ -8,7 +8,7 @@
 #include "stepper.h"
 
 #if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
+#include "arduino.h"
 #else
 	#include "WProgram.h"
 #endif
@@ -22,7 +22,7 @@ class MatrixClass
 	const float OFFSET_BOTTOM = 10;
 	const float OFFSET_LEFT = 10;
 	const float OFFSET_RIGHT = 10;
-  
+
 	// Usable matrix
 	const float HEIGHT = DEFAULT_HEIGHT - OFFSET_LEFT - OFFSET_RIGHT;
 	const float WIDTH = DEFAULT_WIDTH - OFFSET_TOP - OFFSET_BOTTOM;
@@ -38,68 +38,67 @@ class MatrixClass
 	const float BOX_HEIGHT = 15;
 	const float LINES = 4;
 	const int N_SPACES_LINES = 4;
-	
+
 	/* VIRTUAL BOXS */
 
-  //Virtual matrix
-	bool **matrix;
+	//Virtual matrix
+	bool** matrix;
 
-  //Load matrix
+	//Load matrix
 	void setUpVector();
 
-  //Print Matrix.
+	//Print Matrix.
 	void printVector();
 
-  /*
-   * Check if a position in the matrix is​empty and return a value.
-   * TRUE --> is empty.
-   * FALSE --> is full.
-   */
+	/*
+	 * Check if a position in the matrix is​empty and return a value.
+	 * TRUE --> is empty.
+	 * FALSE --> is full.
+	 */
 	bool sectorIsFree(int x, int y);
 
-  /*
-   * Check if a position in the matrix is ​​full and return a value.
-   * TRUE --> is full.
-   * FALSE --> is empty;
-   */
+	/*
+	 * Check if a position in the matrix is ​​full and return a value.
+	 * TRUE --> is full.
+	 * FALSE --> is empty;
+	 */
 	bool sectorIsTake(int x, int y);
 
-  //Put the load in the first free sector.
+	//Put the load in the first free sector.
 	void addAtFirst();
 
-  //Find the next free or full space after a given offset.
+	//Find the next free or full space after a given offset.
 	void nextSlotFreeWithOffset(bool direction);
 
 	/* FISIC BOX */
- 
-  //Selected coordinate for a virtual or a physical slot.
+
+	//Selected coordinate for a virtual or a physical slot.
 	float z_coordinate = -1;
 	float x_coordinate = -1;
 
-  //Convert virtual coordinate to a physical to position.
+	//Convert virtual coordinate to a physical to position.
 	void virtualToFisic(int z, int y);
 
-  //Move steppers to a physical position.
+	//Move steppers to a physical position.
 	void goToPosition();
 
-  //Take a position given manual.
+	//Take a position given manual.
 	void manualInterface(String my_text);
 
-  //Add item to warehouse with a custom position.
+	//Add item to warehouse with a custom position.
 	void inputWithSelection();
 
-  //Remove a warehouse item.
+	//Remove a warehouse item.
 	void outputWithSelection();
 
- public:
-  //Init class.
+public:
+	//Init class.
 	void init();
 
-  //Interaction with class.
+	//Interaction with class.
 	bool useMatrix();
 };
 
 extern MatrixClass Matrix;
 
 #endif
-

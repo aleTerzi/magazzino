@@ -30,9 +30,8 @@ void PinsClass::pinInput()
 	for (auto i = 0; i < size_of_array; i++)
 	{
 		pinMode(pin_in[i], INPUT);
-	}	
+	}
 }
 
 
 PinsClass Pins;
-

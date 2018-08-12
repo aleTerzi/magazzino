@@ -12,7 +12,7 @@ void MatrixClass::init()
 
 bool MatrixClass::useMatrix()
 {
-	if(Menu.statusMenu())
+	if (Menu.statusMenu())
 	{
 		Stepper.engineOn();
 		const int go_here = Menu.outputMenu();
@@ -45,7 +45,7 @@ void MatrixClass::setUpVector()
 		matrix[i] = new bool[N_BOX_FOR_LINE];
 	for (auto y = 0; y < N_BOX_FOR_LINE; y++)
 		for (auto x = 0; x < N_BOX_FOR_COLUMN; x++)
-			matrix[x][y] = false;	
+			matrix[x][y] = false;
 }
 
 void MatrixClass::printVector()
@@ -58,7 +58,7 @@ void MatrixClass::printVector()
 			Serial.print(" ");
 		}
 		Serial.println("");
-	}		
+	}
 }
 
 bool MatrixClass::sectorIsFree(int x, int y)
@@ -84,7 +84,7 @@ void MatrixClass::addAtFirst()
 	{
 		for (auto b = 0; b < N_BOX_FOR_COLUMN; b++)
 		{
-			if(sectorIsFree(b, a))
+			if (sectorIsFree(b, a))
 			{
 				x = b;
 				y = a;
@@ -94,7 +94,7 @@ void MatrixClass::addAtFirst()
 		if (x != -1)
 			break;
 	}
-	if(x == -1)
+	if (x == -1)
 		return;
 	virtualToFisic(y, x);
 	goToPosition();
@@ -170,7 +170,7 @@ void MatrixClass::manualInterface(String my_text)
 			LCD.setReset();
 			Menu.setMenuToHome();
 			return;
-		}		
+		}
 		button_input = LCD.readButtonValue();
 	}
 	LCD.setReset();
@@ -192,7 +192,7 @@ void MatrixClass::outputWithSelection()
 
 void MatrixClass::nextSlotFreeWithOffset(bool direction)
 {
-	if(direction)
+	if (direction)
 	{
 		if (x_coordinate < N_BOX_FOR_COLUMN - 1)
 			x_coordinate += 1;
@@ -217,8 +217,6 @@ void MatrixClass::nextSlotFreeWithOffset(bool direction)
 			z_coordinate -= 1;
 		}
 	}
-	
 }
 
 MatrixClass Matrix;
-

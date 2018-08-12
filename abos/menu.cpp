@@ -11,8 +11,8 @@ void MenuClass::init()
 }
 
 void MenuClass::menu()
-{	
-	if(menu_set)
+{
+	if (menu_set)
 	{
 		menuArrowPosition();
 		return;
@@ -21,7 +21,7 @@ void MenuClass::menu()
 	const auto button_input = menuArrowPosition();
 	auto i = 0;
 	auto menu_print = menu_position;
-	while (selection_dictionary.find(menu_print) != selection_dictionary.end()  && i < LCD.LCD_HEIGHT)
+	while (selection_dictionary.find(menu_print) != selection_dictionary.end() && i < LCD.LCD_HEIGHT)
 	{
 		//Serial.println(i);
 		LCD.printScreenCut(2, i, 2, selection_dictionary[menu_print]);
@@ -34,13 +34,13 @@ void MenuClass::menu()
 	{
 		menuGoToSon();
 		outputSelection();
-	}		
+	}
 	else if (button_input == LCD.LEFT_BUTTON)
 		menuGoToParent();
 	else if (button_input == LCD.CENTER_BUTTON)
 		menuGoToHome();
 	Serial.println(menu_position);
-	if(button_input != LCD.NULL_BUTTON)
+	if (button_input != LCD.NULL_BUTTON)
 		LCD.setReset();
 }
 
@@ -76,14 +76,13 @@ bool MenuClass::statusMenu()
 }
 
 
-
 /* PRIVATE */
 void MenuClass::inizializeDictionary()
 {
 	/* Errors set */
 	//selection_dictionary[-1.1] = "ERRORE SCONOSCUTO!";
 	//selection_dictionary[-1.0] = "ERRORE:";
-	
+
 	/* Command sets */
 	//selection_dictionary[0.0] = "Premi un tasto per iniziare!";
 	//selection_dictionary[0.1] = "ATTENDI";
@@ -115,7 +114,7 @@ void MenuClass::inizializeDictionary()
 	selection_dictionary[330] = "di 10 cm.";
 	selection_dictionary[331] = "di 1 cm.";
 	selection_dictionary[332] = "di 0.1 cm.";
-	
+
 	/* Engine Brake */
 	selection_dictionary[4] = "Disattiva freno motore.";
 }
@@ -123,7 +122,7 @@ void MenuClass::inizializeDictionary()
 double MenuClass::returnEndOfDictionary()
 {
 	//Puntatori a mappa/dizionario dalla fine.
-	std::map<unsigned int, String>::reverse_iterator my_iterator = selection_dictionary.rbegin(); 
+	std::map<unsigned int, String>::reverse_iterator my_iterator = selection_dictionary.rbegin();
 	return my_iterator->first;
 }
 
@@ -136,7 +135,7 @@ double MenuClass::returnBeginOfDictionary()
 
 void MenuClass::menuSet()
 {
-	if(menu_set)
+	if (menu_set)
 	{
 		menu_set = false;
 		LCD.setReset();
@@ -151,14 +150,14 @@ int MenuClass::menuArrowPosition()
 	if (button_input == LCD.NULL_BUTTON)
 	{
 		//menu_set è falso quando si è entrati nel menu.
-		if(!menu_set) 
+		if (!menu_set)
 		{
 			LCD.printScreen(0, menu_arrow_start, ">");
 			LCD.setCursor(0, 0);
 		}
 		return LCD.NULL_BUTTON;
 	}
-	
+
 	//If to set the arrow only in the full display lines.
 	if (button_input == LCD.BOTTOM_BUTTON && menu_arrow_start < LCD.LCD_HEIGHT - menu_arrow_offset - 1)
 	{
@@ -182,38 +181,39 @@ int MenuClass::menuArrowPosition()
 
 void MenuClass::menuWelcomeText()
 {
-	if(!menu_set)
+	if (!menu_set)
 		return;
 	LCD.setReset();
 	LCD.printScreen(1, 1, "Premi un tasto");
 	LCD.printScreen(6, 2, "per iniziare!");
 	delay(100);
-	if(LCD.readButtonValue() != LCD.NULL_BUTTON)
+	if (LCD.readButtonValue() != LCD.NULL_BUTTON)
 		menuSet();
 }
 
 void MenuClass::menuGoToSon()
 {
-	if(selection_dictionary.find((menu_position + menu_arrow_start) * 10) == selection_dictionary.end())
+	if (selection_dictionary.find((menu_position + menu_arrow_start) * 10) == selection_dictionary.end())
 	{
 		menu_search = true;
 		return;
-	}		
-	menu_position = (menu_position  + menu_arrow_start) * 10;
+	}
+	menu_position = (menu_position + menu_arrow_start) * 10;
 	menu_arrow_start = 0;
 }
 
 void MenuClass::menuGoToParent()
 {
-	if(float(menu_position / 10) <= 0)
+	if (float(menu_position / 10) <= 0)
 		return;
 	menu_position /= 10;
-	
-	if(menu_position > 10)
+
+	if (menu_position > 10)
 	{
 		while (menu_position % 10 != 0)
 			menu_position--;
-	}else
+	}
+	else
 	{
 		menu_position = 1;
 	}
@@ -246,4 +246,3 @@ void MenuClass::outputSelection()
 }
 
 MenuClass Menu;
-
