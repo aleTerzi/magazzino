@@ -1,8 +1,10 @@
 # ABOS o.s.
 
-__\*Note:__ _This software is an __alpha__ version, don't make any changes if you don't understand what are you doing._
+__\*Note:__ _This software is an __alpha__ version, we do not recommend using this software, __if you do so at your own risk.___
 
-__\*\*Note:__ _If you find __bug__ or you have good idea use the specific page <a href="https://github.com/aleTerzi/magazzino/issues" target="_blank">here</a>._
+__\*\*Note:__ _This software was created for school purposes and is not recommended for commercial use._
+
+__\*\*\*Note:__ _If you find __bug__ or you have good idea use the specific page <a href="https://github.com/aleTerzi/magazzino/issues" target="_blank">here</a>._
 
 ## Configuration for a good installation:
 1. Wath you need:
@@ -13,10 +15,8 @@ __\*\*Note:__ _If you find __bug__ or you have good idea use the specific page <
     _**Note:** use the offline version._
     
 2. Before proceed we need to add a custom configuration, of the board, on the Arduino IDE:
-    - Download the configuration <a href="https://github.com/SkyNet3D/anet-board" target="_blank">here</a>.
-    - Unzip the file.
-    - Find the directory "anet" in "anet-board-master/hardware", copy or cut the directory.
-    - Now, go in your Arduino folder and in the subfolder named hardware, paste here the folder you had previously copied.
+    - Go to __utilities__, copy the directory __anet__ in your arduino installation (see point 1) and paste it in __arduino\hardware__.
+    - Go to __utilities__, copy the directory __StandardCplusplus__ in your arduino installation (see point 1) and paste it in __arduino\libraries__.
 3. Open Arduino IDE:
     - Go on __Tools, Board__ and select __Anet V1.0__
     - Now plug the board in the USB cable. _**Note:** if the card was already connected unplug it and reconnect it to avoid problems._
@@ -26,4 +26,4 @@ __\*\*Note:__ _If you find __bug__ or you have good idea use the specific page <
     - Open it in the Arduino IDE.
     - Upload it with the (upload) button or use "Ctrl+U".
  
-## YOU HAVE DONE !!
+#### YOU HAVE DONE !!

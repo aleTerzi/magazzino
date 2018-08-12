@@ -15,7 +15,6 @@
 
 class MenuClass
 {
-    /* AGGIUNGERE NELLA DOCUMENTAZIONE DI INSERIRE STL PER ARDUINO*/
     //Dictionary for search in the menu.
     std::map<unsigned int, String> selection_dictionary;
 
