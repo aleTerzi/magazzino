@@ -35,10 +35,8 @@ bool StepperClass::useStepper()
     }
     if (go_here == 30)
     {
-      //Serial.println("Sono qui");
       Menu.outputMenuWithText();
       autoHome();
-      //delay(5000);
       return true;
     }
     if (go_here == 310)
@@ -168,8 +166,7 @@ void StepperClass::moveStepper(stepperMotor& move_this)
   digitalWrite(move_this.DIRECTION_PIN, move_this.direction);
   if (move_this.DEFAULT_ROTATION)
   {
-    for (unsigned long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || move_this.direction); i
-         ++)
+    for (unsigned long int i = 0; i < move_this.stepper && (!hitStopForResetPosition(move_this) || move_this.direction); i++)
     {
       digitalWrite(move_this.STEPPER_PIN, HIGH);
       delayMicroseconds(70);
@@ -207,7 +204,6 @@ void StepperClass::moveWithButton(stepperMotor move_this, float unit_of_space)
       position += unit_of_space;
       LCD.printScreenAndClear(1, 1, "Posizione: ");
       LCD.printScreen(12, 1, position);
-      //LCD.printScreen(1, 11, position);
     }
     else if (button_input == LCD.BOTTOM_BUTTON)
     {
@@ -216,7 +212,6 @@ void StepperClass::moveWithButton(stepperMotor move_this, float unit_of_space)
       position -= unit_of_space;
       LCD.printScreenAndClear(1, 1, "Posizione: ");
       LCD.printScreen(12, 1, position);
-      //LCD.printScreen(1, 11, position);
     }
     button_input = LCD.readButtonValue();
   }

@@ -79,14 +79,6 @@ bool MenuClass::statusMenu()
 /* PRIVATE */
 void MenuClass::inizializeDictionary()
 {
-  /* Errors set */
-  //selection_dictionary[-1.1] = "ERRORE SCONOSCUTO!";
-  //selection_dictionary[-1.0] = "ERRORE:";
-
-  /* Command sets */
-  //selection_dictionary[0.0] = "Premi un tasto per iniziare!";
-  //selection_dictionary[0.1] = "ATTENDI";
-
   /* Add item */
   selection_dictionary[1] = "Aggiungi un oggetto.";
   selection_dictionary[10] = "Primo spazio libero.";
@@ -167,15 +159,8 @@ int MenuClass::menuArrowPosition()
   {
     menu_arrow_start--;
   }
-  //Serial.println(menu_arrow_start);
-  /*
-    if(button_input != LCD.NULL_BUTTON)
-  	LCD.setReset();
-  */
   LCD.printScreen(0, menu_arrow_start, ">");
   LCD.setCursor(0, 0);
-  //Serial.print("Arrow: ");
-  //Serial.println(menu_arrow_start);
   return button_input;
 }
 
@@ -217,7 +202,6 @@ void MenuClass::menuGoToParent()
   {
     menu_position = 1;
   }
-  //Serial.print(menu_position);
   menu_arrow_start = 0;
   output_selection = -1;
 }

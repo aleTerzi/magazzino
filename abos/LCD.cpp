@@ -3,6 +3,7 @@
 //
 
 #include "LCD.h"
+
 /* PUBLIC */
 void LCDClass::init()
 {
@@ -143,17 +144,5 @@ void LCDClass::autoScroolLeft(int x, int y, int offset, String text)
   }
   printScreenCut(x, y, offset, text);
 }
-
-/*
-  void LCDClass::setCursorVisible()
-  {
-	Display20x4.cursor();
-  }
-
-  void LCDClass::setCursorInvisible()
-  {
-	Display20x4.noCursor();
-  }
-*/
 
 LCDClass LCD;

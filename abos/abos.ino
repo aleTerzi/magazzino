@@ -36,8 +36,6 @@ void loop()
 {
   //Navigation menu
   Menu.menu();
-  //Stepper.tryThsi();
-  //delay(5000);
   /*
      ALL ACTIONS HAPPEN HERE!
      Here the code selected in Menu.menu () is executed.
