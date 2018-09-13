@@ -7,7 +7,7 @@ __\*\*Note:__ _This software was created for school purposes and is not recommen
 __\*\*\*Note:__ _If you find __bug__ or you have good idea use the specific page <a href="https://github.com/aleTerzi/magazzino/issues" target="_blank">here</a>._
 
 ## Configuration for a good installation:
-1. Wath you need:
+1. What you need:
     - An Anet board V.1 or V.1.5
     - A power supply for the alimentation of your motherboard.
     - A usb cable with one end of type __USB B.__
